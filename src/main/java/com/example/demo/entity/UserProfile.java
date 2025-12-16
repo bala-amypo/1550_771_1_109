@@ -3,7 +3,7 @@ package com.example.demo;
 import java.time.LocalDateTime;
 
 public class UserProfile{
-    private int id;
+    private Long id;
     private String userId;
     private String fullName;
     private String email;
