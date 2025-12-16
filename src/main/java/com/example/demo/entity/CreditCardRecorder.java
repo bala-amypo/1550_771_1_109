@@ -12,5 +12,7 @@ public class CreditCardRecorder{
     private String status;
     private LocalDateTime createdAt;
 
-    
+    public Long getId{
+        
+    }
 }
