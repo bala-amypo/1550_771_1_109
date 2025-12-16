@@ -1,6 +1,7 @@
 package com.example.demo;
 
-import java.time.LocalDateTime
+import java.time.LocalDateTime;
+
 public class UserProfile{
     private int id;
     private String userId;
