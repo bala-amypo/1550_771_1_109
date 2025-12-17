@@ -8,11 +8,20 @@ public class UserProfile{
     @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable-false)
+    @Column(nullable=false,unique=true)
     private String userId;
+
+    @Column(nullable=false)
     private String fullName;
+
+    @Email
+    @Column(unique=true)
     private String email;
+
+    @Column(nullable=false)
     private String password;
+
+    
     private String role;
     private boolean active;
     private LocalDateTime createdAt;
