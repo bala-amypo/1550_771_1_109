@@ -2,7 +2,9 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
 
+@Entity
 public class RecommendationRecord{
 
     @Id

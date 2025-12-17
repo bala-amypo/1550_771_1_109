@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+
+@Entity 
 public class CreditCardRecorder{
 
     @Id
@@ -25,7 +28,6 @@ public class CreditCardRecorder{
     @Column(nullable=false)
     private String status;
 
-    @Past
     private LocalDateTime createdAt;
 
     public void setId(Long id) {
