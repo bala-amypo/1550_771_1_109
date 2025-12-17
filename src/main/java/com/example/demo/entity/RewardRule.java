@@ -1,29 +1,23 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class RewardRule{
 
     @Id
-    @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable=false)
     private Long cardId;
-
-    @Column(nullable=false)
     private String category;
-
-    @Column(nullable=false)
     private String rewardType;
-
-    @Min(value>0)
     private Double multiplier;
-
     private boolean active;
 
+    public RewardRule(){
 
+    }
+    
     public void setId(Long id) {
         this.id = id;
     }

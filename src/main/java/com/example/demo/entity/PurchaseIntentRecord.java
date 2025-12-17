@@ -2,33 +2,25 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity 
 public class CreditCardRecorder{
 
     @Id
-    @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable=false,unique=true)
     private Long userId;
-
-    @Column(nullable=false)
     private String cardName;
-
-    @Column(nullable=false)
     private String issuer;
-
-    @Column(nullable=false)
     private String cardType;
-
     private Double annualFee;
-
-    @Column(nullable=false)
     private String status;
-
     private LocalDateTime createdAt;
+
+    public CreditCardRecorder(){
+
+    }
 
     public void setId(Long id) {
         this.id = id;

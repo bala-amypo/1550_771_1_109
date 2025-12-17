@@ -2,32 +2,24 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class RecommendationRecord{
 
     @Id
-    @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private long id;
-
-    @Column(nullable=false,unique=true)
     private long userId;
-
-    @Column(nullable=false)
     private long purchaseIntentId;
-
-    @Column(nullable=false)
     private long recommendedCardId;
-
-    @Min(value=0)
     private Double expectedRewardValue;
-
-    @Column(nullable=false)
     private String calculationDetailsJson;
-
     private LocalDateTime recommendedAt;
+    
+    public RecommendationRecord(){
 
+    }
     
     public void setId(long id) {
         this.id = id;

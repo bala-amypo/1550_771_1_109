@@ -2,7 +2,8 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class CreditCardRecorder{
@@ -16,7 +17,9 @@ public class CreditCardRecorder{
     private String status;
     private LocalDateTime createdAt;
 
-    public 
+    public CreditCardRecorder(){
+
+    }
     public void setId(Long id) {
         this.id = id;
     }

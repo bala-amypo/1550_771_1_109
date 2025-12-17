@@ -2,37 +2,26 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class UserProfile{
 
     @Id 
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable=false,unique=true)
     private String userId;
-
-    @Column(nullable=false)
     private String fullName;
-
-    @Email
-    @Column(unique=true)
     private String email;
-
-    @Column(nullable=false)
     private String password;
-
-    @Column(nullable=false)
     private String role;
-
     private boolean active;
-
-    @PastOrPresent
     private LocalDateTime createdAt;
 
+    public UserProfile(){
 
+    }
+    
     public void setId(Long id) {
         this.id = id;
     }
