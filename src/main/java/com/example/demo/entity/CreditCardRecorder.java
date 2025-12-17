@@ -3,13 +3,29 @@ package com.example.demo.entity;
 import java.time.LocalDateTime;
 
 public class CreditCardRecorder{
+
+    @Id
+    @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable=false,unique=true)
     private Long userId;
+
+    @Column(nullable=false)
     private String cardName;
+
+    @Column(nullable=false)
     private String issuer;
+
+    @Column(nullable=false)
     private String cardType;
+
     private Double annualFee;
+    
+    @Column(nullable=false)
     private String status;
+
+    @Past
     private LocalDateTime createdAt;
 
     public void setId(Long id) {
