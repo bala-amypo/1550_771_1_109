@@ -26,4 +26,7 @@ hetIntentbyUser(Long userId)
 getAllIntents()
 
 RecommendationEngineService
-
+generateRecommendation(Long intentId)
+getRecommendationById(Long id)
+getRecommendationByUser(Long userId)
+getAllRecommendations()
