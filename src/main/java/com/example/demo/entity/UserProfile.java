@@ -2,10 +2,13 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+
+@Entity
 public class UserProfile{
 
     @Id 
-    @GeneratedValue(Strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable=false,unique=true)
@@ -24,10 +27,9 @@ public class UserProfile{
     @Column(nullable=false)
     private String role;
 
-    @Column(nullable=true)
     private boolean active;
 
-    @Past
+    @PastOrPresent
     private LocalDateTime createdAt;
 
 
@@ -79,7 +81,7 @@ public class UserProfile{
         return active;
     }
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+      ++  return createdAt;
     }
 
     
