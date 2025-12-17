@@ -23,7 +23,6 @@ public class RecommendationRecord{
     @Column(nullable=false)
     private String calculationDetailsJson;
 
-    @Past
     private LocalDateTime recommendedAt;
 
     
