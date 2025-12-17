@@ -14,12 +14,16 @@ public class RecommendationRecord{
     @Column(nullable=false)
     private long purchaseIntentId;
 
-    Column(nullable=false)
+    @Column(nullable=false)
     private long recommendedCardId;
 
-    
+    @Min(value>=0)
     private Double expectedRewardValue;
+
+    @Column(nullable=false)
     private String calculationDetailsJson;
+
+    @Past
     private LocalDateTime recommendedAt;
 
     
