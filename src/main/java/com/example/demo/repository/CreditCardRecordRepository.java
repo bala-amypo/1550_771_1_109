@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo1.model.Student;
 
 @Repository
-public interface CreditCardRecorderRepository extends JpaRepository<Student,Integer>{
+public interface CreditCardRecordRepository extends JpaRepository<CreditCardRecord,Integer>{
 
 }
