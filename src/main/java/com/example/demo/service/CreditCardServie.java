@@ -8,7 +8,7 @@ updateUserStatus(Long id,boolean active);
 
 CreditCardService
 addCard(CreditCarRecord card);
-UpdateCard(Lonf id,CreditCardRecord updated);
+UpdateCard(Long id,CreditCardRecord updated);
 getCardsByUser(Long userId)
 getCardById(Long id)
 getAllCards()
@@ -16,4 +16,14 @@ getAllCards()
 RewardRuleService
 createRule(RewardRule rule)
 updateRule(Long id,RewardRule updated)
-getRulesByCard(Long )
+getRulesByCard(Long cardId)
+getActiveRules()
+getAllRules()
+
+PurchaseIntentService
+createIntent(PurchaseIntentRecord intent)
+hetIntentbyUser(Long userId)
+getAllIntents()
+
+RecommendationEngineService
+
