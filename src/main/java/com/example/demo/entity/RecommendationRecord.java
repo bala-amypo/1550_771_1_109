@@ -17,7 +17,7 @@ public class RecommendationRecord{
     @Column(nullable=false)
     private long recommendedCardId;
 
-    @Min(value>=0)
+    @Min(value=0)
     private Double expectedRewardValue;
 
     @Column(nullable=false)
