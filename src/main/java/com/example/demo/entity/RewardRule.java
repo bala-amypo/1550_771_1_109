@@ -1,12 +1,27 @@
 package com.example.demo.entity;
 
 public class RewardRule{
+
+    @Id
+    @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable=false)
     private Long cardId;
+
+    Column(nullable=false)
     private String category;
+
+    Column(nullable=false)
     private String rewardType;
+
+    @Min(value>0)
     private Double multiplier;
+
+    Column(nullable=false)
     private boolean active;
+
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -25,6 +40,8 @@ public class RewardRule{
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    
     public Long getId() {
         return id;
     }
