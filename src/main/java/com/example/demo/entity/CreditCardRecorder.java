@@ -6,31 +6,17 @@ import jakarta.persistence.*;
 
 @Entity
 public class CreditCardRecorder{
-
-    @Id
-    @GeneratedValue(Strategy=GenerationType.IDENTITY)
+    @Id 
     private Long id;
-
-    @Column(nullable=false,unique=true)
     private Long userId;
-
-    @Column(nullable=false)
     private String cardName;
-
-    @Column(nullable=false)
     private String issuer;
-
-    @Column(nullable=false)
     private String cardType;
-
     private Double annualFee;
-    
-    @Column(nullable=false)
     private String status;
-
-    
     private LocalDateTime createdAt;
 
+    public 
     public void setId(Long id) {
         this.id = id;
     }
