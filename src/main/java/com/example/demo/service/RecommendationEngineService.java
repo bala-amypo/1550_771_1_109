@@ -7,7 +7,7 @@ import com.example.demo.entity.UserProfile;
 
 @Service
 public interface RecommendationEngineService {
-    RecommendationRecord createIntent(PurchaseIntentRecord intent)
+    RecommendationRecord generateRecommendation(Long intentId);
     RecommendationRecord getIntentsbyUser(Long userId)
     RecommendationRecord getIntentById(Long id);
     RecommendationRecord getAllIntents();
