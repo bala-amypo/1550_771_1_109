@@ -6,8 +6,8 @@ import com.example.demo.entity.UserProfile;
 
 @Service
 public interface PurchaseIntentService {
-    PurchaseIntentRecord createIntent(UserProfile profile);
-    PurchaseIntentRecord getUserById(Long id);
-    PurchaseIntentRecord findByUserId(String userId);
-    PurchaseIntentRecord getAllUsers();
+    PurchaseIntentRecord createIntent(PurchaseIntentRecord intent)
+    PurchaseIntentRecord getIntentsbyUser(Long userId)
+    PurchaseIntentRecord getIntentById(Long id);
+    PurchaseIntentRecord getAllIntents();
 }

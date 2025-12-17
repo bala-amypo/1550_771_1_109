@@ -1,32 +1,14 @@
+package com.example.demo.service;
 
-UserProfileService
-createUser(UserProfile profile)
-getUserById(Long id);
-findByUserId(String userId);
-getAllUsers();
-updateUserStatus(Long id,boolean active);
+import org.springframework.stereotype.Service;
 
-CreditCardService
-addCard(CreditCarRecord card);
-UpdateCard(Long id,CreditCardRecord updated);
-getCardsByUser(Long userId)
-getCardById(Long id)
-getAllCards()
+import com.example.demo.entity.UserProfile;
 
-RewardRuleService
-createRule(RewardRule rule)
-updateRule(Long id,RewardRule updated)
-getRulesByCard(Long cardId)
-getActiveRules()
-getAllRules()
-
-PurchaseIntentService
-createIntent(PurchaseIntentRecord intent)
-hetIntentbyUser(Long userId)
-getAllIntents()
-
-RecommendationEngineService
-generateRecommendation(Long intentId)
-getRecommendationById(Long id)
-getRecommendationByUser(Long userId)
-getAllRecommendations()
+@Service
+public interface UserProfileService {
+    UserProfile createUser(UserProfile profile);
+    UserProfile getUserById(Long id);
+    UserProfile findByUserId(String userId);
+    UserProfile getAllUsers();
+    UserProfile updateUserStatus(Long id,boolean active);
+}
