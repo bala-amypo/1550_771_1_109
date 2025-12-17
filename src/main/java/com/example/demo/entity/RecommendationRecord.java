@@ -3,10 +3,21 @@ package com.example.demo.entity;
 import java.time.LocalDateTime;
 
 public class RecommendationRecord{
+
+    @Id
+    @GeneratedValue(Strategy=GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable=false,unique=true)
     private long userId;
+
+    @Column(nullable=false)
     private long purchaseIntentId;
+
+    Column(nullable=false)
     private long recommendedCardId;
+
+    
     private Double expectedRewardValue;
     private String calculationDetailsJson;
     private LocalDateTime recommendedAt;
