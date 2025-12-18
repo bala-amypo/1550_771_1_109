@@ -16,20 +16,17 @@ public class UserProfileController {
     @Autowired
     UserProfileService userProfileService;
 
-    // POST /api/users - Create user
     @PostMapping
     public ResponseEntity<UserProfile> createUser(@RequestBody UserProfile profile) {
         UserProfile user = userProfileService.createUser(profile);
         return ResponseEntity.status(201).body(user);
     }
 
-    // GET /api/users - List all users
     @GetMapping
     public List<UserProfile> getAllUsers() {
         return userProfileService.getAllUsers();
     }
 
-    // GET /api/users/{id} - Get user by ID
     @GetMapping("/{id}")
     public ResponseEntity<UserProfile> getUserById(@PathVariable Long id) {
         UserProfile user = userProfileService.getUserById(id);
@@ -39,7 +36,6 @@ public class UserProfileController {
         return ResponseEntity.status(404).build();
     }
 
-    // PUT /api/users/{id}/status - Activate / Deactivate user
     @PutMapping("/{id}/status")
     public ResponseEntity<String> updateStatus(@PathVariable Long id,
                                                @RequestParam boolean active) {
@@ -49,7 +45,6 @@ public class UserProfileController {
         return ResponseEntity.status(404).build();
     }
 
-    // GET /api/users/lookup/{userId} - Lookup user by userId
     @GetMapping("/lookup/{userId}")
     public ResponseEntity<UserProfile> lookupUser(@PathVariable String userId) {
         UserProfile user = userProfileService.findByUserId(userId);

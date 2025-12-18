@@ -12,22 +12,26 @@ import com.example.demo.service.UserProfileService;
 
 @Service
 public class UserProfileServiceImpl implements UserProfileService{
+
     @Autowired
     UserProfileRepository userProfileRepository;
-    
+
     @Override
     public UserProfile createUser(UserProfile profile){
        return userProfileRepository.save(profile);
     }
+
     @Override
     public UserProfile getUserById(Long id){
-      Optional<UserProfile> optionalUserProfile = UserProfileRepository. findUserById(id);
-      return optionalUserProfile .orElse(null);
+      Optional<UserProfile> optionalUserProfile = userProfileRepository.findById(id);
+      return optionalUserProfile.orElse(null);
     }
+
     @Override
     public UserProfile findByUserId(String userId){
-      return userProfileRepository.findById(userId);
+      return userProfileRepository.findByUserId(userId);
     }
+
     @Override
     public List<UserProfile> getAllUsers(){
        return userProfileRepository.findAll();
@@ -44,4 +48,3 @@ public class UserProfileServiceImpl implements UserProfileService{
         return null;
     }
 }
-
