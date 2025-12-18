@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entiyt.UserProfile;
+import com.example.demo.entity.UserProfile;
 import com.example.demo.repository.UserProfileRepository;
 import com.example.demo.service.UserProfileService;
 
@@ -17,7 +17,7 @@ public class UserProfileServiceImpl implements UserProfileService{
     
     @Override
     public UserProfile createUser(UserProfile profile){
-       return UserProfileRepository.save(profile);
+       return userProfileRepository.save(profile);
     }
     @Override
     public UserProfile getUserById(Long id){
