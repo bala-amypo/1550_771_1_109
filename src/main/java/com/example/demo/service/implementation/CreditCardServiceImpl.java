@@ -35,13 +35,17 @@ public class CreditCardRecordImpl implements CreditCardService{
 
     @Override
     public CreditCardRecord getCardsByUser(Long userId){
-      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findById(user);
+      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findByUserId(userId);
       return optionalCreditCardRecord.orElse(null);
     }
     @Override
-    public CreditCardRecord getCardById(Long userId){
-      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findById(user);
+    public CreditCardRecord getCardById(Long id){
+      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findById(id);
       return optionalCreditCardRecord.orElse(null);
+    }
+    @Override
+    public List<CreditCardRecord> getAllCards(){
+       return CreditCardRecordRepository.findAll();
     }
 
 
