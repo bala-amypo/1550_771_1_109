@@ -1,37 +1,37 @@
-package com.example.demo.dto;
+// package com.example.demo.dto;
 
-public class JwtResponse {
+// public class JwtResponse {
     
-}
+// }
 
-UserProfileService
-createUser(UserProfile profile)
-getUserById(Long id);
-findByUserId(String userId);
-getAllUsers();
-updateUserStatus(Long id,boolean active);
+// UserProfileService
+// createUser(UserProfile profile)
+// getUserById(Long id);
+// findByUserId(String userId);
+// getAllUsers();
+// updateUserStatus(Long id,boolean active);
 
-CreditCardService
-addCard(CreditCarRecord card);
-UpdateCard(Long id,CreditCardRecord updated);
-getCardsByUser(Long userId)
-getCardById(Long id)
-getAllCards()
+// CreditCardService
+// addCard(CreditCarRecord card);
+// UpdateCard(Long id,CreditCardRecord updated);
+// getCardsByUser(Long userId)
+// getCardById(Long id)
+// getAllCards()
 
-RewardRuleService
-createRule(RewardRule rule)
-updateRule(Long id,RewardRule updated)
-getRulesByCard(Long cardId)
-getActiveRules()
-getAllRules()
+// RewardRuleService
+// createRule(RewardRule rule)
+// updateRule(Long id,RewardRule updated)
+// getRulesByCard(Long cardId)
+// getActiveRules()
+// getAllRules()
 
-PurchaseIntentService
-createIntent(PurchaseIntentRecord intent)
-hetIntentbyUser(Long userId)
-getAllIntents()
+// PurchaseIntentService
+// createIntent(PurchaseIntentRecord intent)
+// hetIntentbyUser(Long userId)
+// getAllIntents()
 
-RecommendationEngineService
-generateRecommendation(Long intentId)
-getRecommendationById(Long id)
-getRecommendationByUser(Long userId)
-getAllRecommendations()
+// RecommendationEngineService
+// generateRecommendation(Long intentId)
+// getRecommendationById(Long id)
+// getRecommendationByUser(Long userId)
+// getAllRecommendations()
