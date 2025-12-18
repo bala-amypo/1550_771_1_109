@@ -27,6 +27,14 @@ public class CreditCardController {
           CreditCardRecord card=creditCardService.addCard(creditCardRecord);
           return ResponseEntity.status(201).body(card);
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateCard(@PathVariable Long id,
+                                               @RequestBody CreditCardRecord creditCardRecord) {
+        if (creditCardService.updateCard(id, creditCardRecord) != null) {
+            return ResponseEntity.status(200).body("Card Updated Successfully");
+        }
+        return ResponseEntity.status(404).build();
+    }
     @GetMapping("/user/{userId}")
     public ResponseEntity<CreditCardRecord> getCardsByUser(@PathVariable Long userId) {
         CreditCardRecord card = creditCardService.getCardsByUser(userId);
@@ -47,55 +55,5 @@ public class CreditCardController {
     @GetMapping
     public List<CreditCardRecord> getAllcards() {
         return creditCardService.getAllcards();
-    }
-    @PutMapping("/{id}/status")
-    public ResponseEntity<String> updateStatus(@PathVariable Long id,
-                                               @RequestParam boolean active) {
-        if (userProfileService.updateUserStatus(id, active) != null) {
-            return ResponseEntity.status(200).body("Status Updated Successfully");
-        }
-        return ResponseEntity.status(404).build();
-    }
-
-
-
-    @PostMapping
-    public ResponseEntity<UserProfile> createUser(@RequestBody UserProfile profile) {
-        UserProfile user = userProfileService.createUser(profile);
-        return ResponseEntity.status(201).body(user);
-    }
-
-    @GetMapping
-    public List<Student> getAll(){
-        return studentService.getStudent();
-    }
-    @PostMapping
-    public ResponseEntity<Student> createAll(@RequestBody Student student){
-          Student st=studentService.createStudent(student);
-          return ResponseEntity.status(201).body(st);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<Student> getById(@PathVariable int id){
-        Student st=studentService.getById(id);
-        return ResponseEntity.status(200).body(st);
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteAll(@PathVariable int id){
-         boolean isDeleted= studentService.deleteStudent(id);
-         if(isDeleted){
-            return ResponseEntity.status(201).body("Successful");
-         }
-         else{
-            return ResponseEntity.status(404).build();
-         }
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<String> putAll(int id,@RequestBody Student student){
-         if(studentService.updateStudent(id, student)!=null){
-            return ResponseEntity.status(201).body("Successful");
-         }
-         else{
-             return ResponseEntity.status(404).build();
-         }
     }
 }
