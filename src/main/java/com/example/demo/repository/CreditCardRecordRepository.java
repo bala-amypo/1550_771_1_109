@@ -7,4 +7,6 @@ import com.example.demo.entity.CreditCardRecord;
 
 @Repository
 public interface CreditCardRecordRepository extends JpaRepository<CreditCardRecord, Long> {
+
+    List<CreditCardRecord> findByUserId(Long userId);
 }
