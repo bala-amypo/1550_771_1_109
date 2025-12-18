@@ -10,5 +10,5 @@ public interface CreditCardService {
     UserProfile updateCard(Long id,CreditCardRecord updated);
     UserProfile getCardsByUser(Long userId);
     UserProfile getCardById(Long id);
-    UserProfile getAllCards();
+    List<CreditCardService> getAllCards(); 
 }
