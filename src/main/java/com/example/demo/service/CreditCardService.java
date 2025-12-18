@@ -8,7 +8,7 @@ import com.example.demo.entity.CreditCardRecord;
 public interface CreditCardService {
     CreditCardRecord addCard(CreditCardRecord card);
     CreditCardService updateCard(Long id,CreditCardRecord updated);
-    CreditCardService getCardsByUser(Long userId);
+    List<CreditCardService> getCardsByUser(Long userId);
     CreditCardService getCardById(Long id);
     List<CreditCardService> getAllCards(); 
 }

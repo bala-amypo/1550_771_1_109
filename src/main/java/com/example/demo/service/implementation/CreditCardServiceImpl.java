@@ -24,10 +24,10 @@ public class CreditCardServiceImpl implements CreditCardService{
         Optional<CreditCardRecord> optional = creditCardRecordRepository. findById(id);
         if(optional.isPresent()){
         CreditCardRecord existing = optional.get();
-        existing.setId(updated.getid());
-        existing.setUserId(updated.getuserId());
-        existing.setCardName(updated.getcardName());
-        existing.setIssuser(updated.getissuser());
+        existing.setId(updated.getId());
+        existing.setUserId(updated.getUserId());
+        existing.setCardName(updated.getCardName());
+        existing.setIssuser(updated.getIssuser());
         existing.setCardType(updated.getCardType());
         existing.setAnnualFee(updated.getAnnualFee());
         existing.setStatus(updated.getStatus());
@@ -47,6 +47,6 @@ public class CreditCardServiceImpl implements CreditCardService{
     }
     @Override
     public List<CreditCardRecord> getAllCards(){
-       return CreditCardRecordRepository.findAll();
+       return creditCardRecordRepository.findAll();
     }
 }
