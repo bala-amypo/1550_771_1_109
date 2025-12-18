@@ -36,6 +36,8 @@ public class StudentController {
         Student st=studentService.getById(id);
         return ResponseEntity.status(200).body(st);
     }
+    @GetMapping("/{id}")
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAll(@PathVariable int id){
          boolean isDeleted= studentService.deleteStudent(id);

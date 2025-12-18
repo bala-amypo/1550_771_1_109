@@ -24,9 +24,20 @@ public class CreditCardController {
 
     @PostMapping
     public ResponseEntity<CreditCardRecord> createCard(@RequestBody CreditCardRecord creditCardRecord){
-          CreditCardRecord credit=creditCardService.createCard(creditCardRecord);
-          return ResponseEntity.status(201).body(st);
+          CreditCardRecord card=creditCardService.addCard(creditCardRecord);
+          return ResponseEntity.status(201).body(card);
     }
+
+    public ResponseEntity<CreditCardRecord> getUserById(@PathVariable Long id) {
+        UserProfile user = userProfileService.getUserById(id);
+        if (user != null) {
+            return ResponseEntity.status(200).body(user);
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+
+
 
     @PostMapping
     public ResponseEntity<UserProfile> createUser(@RequestBody UserProfile profile) {
