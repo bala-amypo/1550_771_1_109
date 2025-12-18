@@ -28,15 +28,16 @@ public class CreditCardController {
           return ResponseEntity.status(201).body(card);
     }
     @GetMapping("/user/{userId}")
-    public ResponseEntity<CreditCardRecord> getCardsByUser(@PathVariable Long UserId) {
+    public ResponseEntity<CreditCardRecord> getCardsByUser(@PathVariable Long userId) {
         CreditCardRecord card = creditCardService.getCardsByUser(userId);
-        if (user != null) {
+        if (card != null) {
             return ResponseEntity.status(200).body(card);
         }
         return ResponseEntity.status(404).build();
     }
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<CreditCardRecord> getCardsByUser(@PathVariable Long UserId) {
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CreditCardRecord> getCardById(@PathVariable Long UserId) {
         CreditCardRecord card = creditCardService.getCardsByUser(userId);
         if (user != null) {
             return ResponseEntity.status(200).body(card);
