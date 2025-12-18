@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity 
-public class CreditCardRecorder{
+public class PurchaseIntentRecord{
 
     @Id
     private Long id;
@@ -18,7 +18,7 @@ public class CreditCardRecorder{
     private String status;
     private LocalDateTime createdAt;
 
-    public CreditCardRecorder(){
+    public PurchaseIntentRecord(){
 
     }
 
