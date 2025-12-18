@@ -7,8 +7,8 @@ import com.example.demo.entity.CreditCardRecord;
 @Service
 public interface CreditCardService {
     CreditCardRecord addCard(CreditCardRecord card);
-    CreditCardService updateCard(Long id,CreditCardRecord updated);
-    List<CreditCardService> getCardsByUser(Long userId);
-    CreditCardService getCardById(Long id);
-    List<CreditCardService> getAllCards(); 
+    CreditCardRecord updateCard(Long id,CreditCardRecord updated);
+    List<CreditCardRecord> getCardsByUser(Long userId);
+    CreditCardRecord getCardById(Long id);
+    List<CreditCardRecord> getAllCards(); 
 }
