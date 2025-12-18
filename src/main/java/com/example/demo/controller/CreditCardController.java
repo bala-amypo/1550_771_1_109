@@ -18,9 +18,9 @@ import com.example.demo1.service.CreditCardService;
 
 @RestController
 @RequestMapping("/student")
-public class CreditCardService {
+public class CreditCardController {
     @Autowired
-    StudentService studentService;
+    CreditCardService creditCardService;
 
     @GetMapping
     public List<Student> getAll(){
