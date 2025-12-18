@@ -11,40 +11,49 @@ import com.example.demo.repository.RewardRuleRepository;
 import com.example.demo.service.RewardRuleService;
 
 @Service
-public class UserProfileServiceImpl implements UserProfileService {
+public class RewardRuleServiceImpl implements RewardRuleService {
 
     @Autowired
-    UserProfileRepository userProfileRepository;
+    RewardRuleRepository rewardRuleRepository;
 
+    // 1. createRule → validate multiplier
     @Override
-    public UserProfile createUser(UserProfile profile){
-       return userProfileRepository.save(profile);
+    public RewardRule createRule(RewardRule rule) {
+        if (rule.getMultiplier() == null || rule.getMultiplier() <= 0) {
+            return null;
+        }
+        return rewardRuleRepository.save(rule);
     }
 
+    // 2. updateRule
     @Override
-    public UserProfile getUserById(Long id){
-      Optional<UserProfile> optionalUserProfile = userProfileRepository.findById(id);
-      return optionalUserProfile.orElse(null);
-    }
-
-    @Override
-    public UserProfile findByUserId(String userId){
-      return userProfileRepository.findByUserId(userId);
-    }
-
-    @Override
-    public List<UserProfile> getAllUsers(){
-       return userProfileRepository.findAll();
-    }
-    
-    @Override
-    public UserProfile updateUserStatus(Long id, boolean active) {
-        Optional<UserProfile> optionalUser = userProfileRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            UserProfile oldUser = optionalUser.get();
-            oldUser.setActive(active);
-            return userProfileRepository.save(oldUser);
+    public RewardRule updateRule(Long id, RewardRule updated) {
+        Optional<RewardRule> optionalRule = rewardRuleRepository.findById(id);
+        if (optionalRule.isPresent()) {
+            RewardRule oldRule = optionalRule.get();
+            oldRule.setCardId(updated.getCardId());
+            oldRule.setMultiplier(updated.getMultiplier());
+            oldRule.setActive(updated.isActive());
+            return rewardRuleRepository.save(oldRule);
         }
         return null;
+    }
+
+    // 3. getRulesByCard
+    @Override
+    public List<RewardRule> getRulesByCard(Long cardId) {
+        return rewardRuleRepository.findByCardId(cardId);
+    }
+
+    // 4. getActiveRules
+    @Override
+    public List<RewardRule> getActiveRules() {
+        return rewardRuleRepository.findByActiveTrue();
+    }
+
+    // 5. getAllRules
+    @Override
+    public List<RewardRule> getAllRules() {
+        return rewardRuleRepository.findAll();
     }
 }
