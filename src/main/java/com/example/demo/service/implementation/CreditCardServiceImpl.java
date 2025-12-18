@@ -23,7 +23,7 @@ public class CreditCardRecordImpl implements CreditCardService{
     public CreditCardRecord updateCard(Long id,CreditCardRecord updated){
         Optional<CreditCardRecord> optionalCreditCardRecord = creditCardRecordRepository. findById(id);
         if(optionalCreditCardRecord.isPresent()){
-        CreditCardRecord oldCard = optionalCreditCardRecord.get();
+        CreditCardRecord oldCreditCardRecord = optionalCreditCardRecord.get();
         oldCreditCardRecord.setid(UpdatedCreditCardRecord.getid());
         oldCreditCardRecord.setuserId(UpdatedCreditCardRecord.getuserId());
         oldCreditCardRecord.setcardName(UpdatedCreditCardRecord.getcardName());
