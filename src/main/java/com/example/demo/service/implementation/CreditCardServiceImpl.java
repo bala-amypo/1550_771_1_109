@@ -20,14 +20,18 @@ public class CreditCardRecordImpl implements CreditCardService{
         Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository. findById(id);
         if(optionalCreditCardRecord.isPresent()){
         Student oldCreditCardRecord = optionalCreditCardRecord.get();
-        oldCreditCardRecord. set id(UpdatedCreditCardRecord.getName());
-        oldCreditCardRecord.set userId(UpdatedCreditCardRecord.getEmail());
-        oldCreditCardRecord.set cardName(UpdatedCreditCardRecord.getCourse());
-        oldCreditCardRecord.set Age(UpdatedCreditCardRecord.getAge());
+        oldCreditCardRecord. set id(UpdatedCreditCardRecord.getid());
+        oldCreditCardRecord.setuserId(UpdatedCreditCardRecord.getuserId());
+        oldCreditCardRecord.setcardName(UpdatedCreditCardRecord.getcardName());
+        oldCreditCardRecord.setissuer(UpdatedCreditCardRecord.getissuer());
+        oldCreditCardRecord.setcardType(UpdatedCreditCardRecord.getcardType());
+        oldCreditCardRecord.setannualFee(UpdatedCreditCardRecord.getannualFee());
+        oldCreditCardRecord.setstatus(UpdatedCreditCardRecord.getstatus());
+        oldCreditCardRecord.setcreatedAt(UpdatedCreditCardRecord.getcreatedAt());
         return studentRepository.save(oldStudent);
-        }
-        return null;
     }
+        return null;
+
 
 
 
