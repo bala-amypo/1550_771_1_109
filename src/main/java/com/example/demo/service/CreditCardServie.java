@@ -6,9 +6,9 @@ import com.example.demo.entity.CreditCardRecord;
 
 @Service
 public interface CreditCardService {
-    UserProfile addCard(CreditCardRecord card);
-    UserProfile updateCard(Long id,CreditCardRecord updated);
-    UserProfile getCardsByUser(Long userId);
-    UserProfile getCardById(Long id);
+    CreditCardService addCard(CreditCardRecord card);
+    CreditCardService updateCard(Long id,CreditCardRecord updated);
+    CreditCardService getCardsByUser(Long userId);
+    CreditCardService getCardById(Long id);
     List<CreditCardService> getAllCards(); 
 }
