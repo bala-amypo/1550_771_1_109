@@ -9,6 +9,7 @@ import com.example.demo.entity.UserProfile;
 public interface RewardRuleService {
     RewardRule createRule(RewardRule rule);
     RewardRule updateRule(Long id,RewardRule updated)
-    RewardRule getRule(Long id);
-    RewardRule getAllIntents();
+    RewardRule getRulesByCard(Long cardId);
+    RewardRule getActiveRules();
+    RewardRule getAllRules();
 }
