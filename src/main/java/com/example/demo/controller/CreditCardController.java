@@ -14,18 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.CreditCardRecord;
-import com.example.demo1.service.CreditCardService;
+import com.example.demo.service.CreditCardService;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/api/credits")
 public class CreditCardController {
     @Autowired
     CreditCardService creditCardService;
 
     @PostMapping
-    public ResponseEntity<Student> createAll(@RequestBody Student student){
-          Student st=studentService.createStudent(student);
+    public ResponseEntity<CreditCardRecord> createAll(@RequestBody CreditCardRecord creditCardRecord){
+          CreditCardRecord credit=creditCardService.createCard(creditCardRecord);
           return ResponseEntity.status(201).body(st);
+    }
+
+    @PostMapping
+    public ResponseEntity<UserProfile> createUser(@RequestBody UserProfile profile) {
+        UserProfile user = userProfileService.createUser(profile);
+        return ResponseEntity.status(201).body(user);
     }
 
     @GetMapping
