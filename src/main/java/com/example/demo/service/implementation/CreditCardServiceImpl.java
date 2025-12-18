@@ -73,11 +73,13 @@ public class StudentServiceImpl implements StudentService{
         Optional<CreditCardRecord> optionalCreditCardRecord =CreditCardRecordRepository. findById(id);
         if(optionalCreditCardRecord.isPresent()){
         Student oldCreditCardRecord = optionalCreditCardRecord.get();
-        oldCreditCardRecord.setUserId(UpdatedStudent.getName());
-        oldCreditCardRecord.setCardName(UpdatedStudent.getEmail());
-        oldCreditCardRecord.setIssuer(UpdatedStudent.getCourse());
-        oldCreditCardRecord.setCardType(UpdatedStudent.getAge());
+        oldCreditCardRecord.setUserId(UpdatedStudent.getUserId());
+        oldCreditCardRecord.setCardName(UpdatedStudent.getCardName());
+        oldCreditCardRecord.setIssuer(UpdatedStudent.getIssuer());
+        oldCreditCardRecord.setCardType(UpdatedStudent.getCardType());
         oldCreditCardRecord.setAnnualFee(UpdatedStudent.getAge());
+        oldCreditCardRecord.setStatus(UpdatedStudent.getAge());
+        oldCreditCardRecord.setCreatedAt(UpdatedStudent.getAge());
         return studentRepository.save(oldStudent);
         }
         return null;
