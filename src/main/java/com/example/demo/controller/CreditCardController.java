@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.CreditCardRecord;
+import com.example.demo.entity.CreditCardRecord;
 import com.example.demo1.service.CreditCardService;
 
 @RestController
@@ -21,6 +21,12 @@ import com.example.demo1.service.CreditCardService;
 public class CreditCardController {
     @Autowired
     CreditCardService creditCardService;
+
+    @PostMapping
+    public ResponseEntity<Student> createAll(@RequestBody Student student){
+          Student st=studentService.createStudent(student);
+          return ResponseEntity.status(201).body(st);
+    }
 
     @GetMapping
     public List<Student> getAll(){
