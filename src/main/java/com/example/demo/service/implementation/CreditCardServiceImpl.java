@@ -23,14 +23,26 @@ public class CreditCardRecordImpl implements CreditCardService{
         oldCreditCardRecord. set id(UpdatedCreditCardRecord.getid());
         oldCreditCardRecord.setuserId(UpdatedCreditCardRecord.getuserId());
         oldCreditCardRecord.setcardName(UpdatedCreditCardRecord.getcardName());
-        oldCreditCardRecord.setissuer(UpdatedCreditCardRecord.getissuer());
+        oldCreditCardRecord.setissuser(UpdatedCreditCardRecord.getissuser());
         oldCreditCardRecord.setcardType(UpdatedCreditCardRecord.getcardType());
         oldCreditCardRecord.setannualFee(UpdatedCreditCardRecord.getannualFee());
         oldCreditCardRecord.setstatus(UpdatedCreditCardRecord.getstatus());
         oldCreditCardRecord.setcreatedAt(UpdatedCreditCardRecord.getcreatedAt());
         return studentRepository.save(oldStudent);
-    }
+        }
         return null;
+    }
+
+    @Override
+    public CreditCardRecord getCardsByUser(Long userId){
+      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findById(user);
+      return optionalCreditCardRecord.orElse(null);
+    }
+    @Override
+    public CreditCardRecord getCardById(Long userId){
+      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findById(user);
+      return optionalCreditCardRecord.orElse(null);
+    }
 
 
 
@@ -67,5 +79,5 @@ public class CreditCardRecordImpl implements CreditCardService{
         oldStudent.setAge(UpdatedStudent.getAge());
         return studentRepository.save(oldStudent);
         }
-        return null;
+    return null;
     }
