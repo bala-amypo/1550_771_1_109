@@ -1,0 +1,14 @@
+package com.example.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.PurchaseIntentRecord;
+import com.example.demo.entity.UserProfile;
+
+@Service
+public interface RewardRuleService {
+    RewardRule createRule(RewardRule rule);
+    RewardRule updateRule(Long id,RewardRule updated)
+    RewardRule getRule(Long id);
+    RewardRule getAllIntents();
+}
