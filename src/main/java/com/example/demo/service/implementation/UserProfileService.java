@@ -26,7 +26,7 @@ public class UserProfileServiceImpl implements UserProfileService{
     }
     @Override
     public UserProfile findByUserId(String userId){
-      return userProfileRepository.findByUserId(userId);
+      return userProfileRepository.findById(userId);
     }
     @Override
     public List<UserProfile> getAllUsers(){
