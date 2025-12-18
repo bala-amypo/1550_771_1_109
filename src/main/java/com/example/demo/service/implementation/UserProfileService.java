@@ -17,8 +17,15 @@ public class UserProfileServiceImpl implements UserProfileService{
     
     @Override
     public UserProfile createUser(UserProfile profile){
-       return studentRepository.save(student);
+       return UserProfileRepository.save(profile);
     }
+    @Override
+    public UserProfile getUserById(Long id){
+      Optional<UserProfile> optionalUserProfile = UserProfileRepository. findUserById(id);
+      return optionalUserProfile .orElse(null);
+    }
+
+    
     @Override
     public List<Student> getStudent(){
        return studentRepository.findAll();
