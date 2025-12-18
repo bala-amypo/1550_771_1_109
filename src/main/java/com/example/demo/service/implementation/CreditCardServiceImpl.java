@@ -16,14 +16,14 @@ public class CreditCardRecordImpl implements CreditCardService{
     CreditCardRecordRepository creditCardRecordRepository;
 
     @Override
-    public CreditCardRecord updatet(int id,Student UpdatedStudent){
-        Optional<Student> optionalStudent = studentRepository. findById(id);
-        if(optionalStudent.isPresent()){
-        Student oldStudent = optionalStudent.get();
-        oldStudent. setName(UpdatedStudent.getName());
-        oldStudent.setEmail(UpdatedStudent.getEmail());
-        oldStudent.setCourse(UpdatedStudent.getCourse());
-        oldStudent.setAge(UpdatedStudent.getAge());
+    public CreditCardRecord updateCard(Long id,CreditCardRecord updated){
+        Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository. findById(id);
+        if(optionalCreditCardRecord.isPresent()){
+        Student oldCreditCardRecord = optionalCreditCardRecord.get();
+        oldCreditCardRecord. set id(UpdatedCreditCardRecord.getName());
+        oldCreditCardRecord.set userId(UpdatedCreditCardRecord.getEmail());
+        oldCreditCardRecord.set cardName(UpdatedCreditCardRecord.getCourse());
+        oldCreditCardRecord.set Age(UpdatedCreditCardRecord.getAge());
         return studentRepository.save(oldStudent);
         }
         return null;
