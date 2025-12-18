@@ -17,9 +17,9 @@ public class CreditCardRecordImpl implements CreditCardService{
 
     @Override
     public CreditCardRecord updateCard(Long id,CreditCardRecord updated){
-        Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository. findById(id);
+        Optional<CreditCardRecord> optionalCreditCardRecord = creditCardRecordRepository. findById(id);
         if(optionalCreditCardRecord.isPresent()){
-        Student oldCreditCardRecord = optionalCreditCardRecord.get();
+        CreditCardRecord oldCreditCardRecord = optionalCreditCardRecord.get();
         oldCreditCardRecord. set id(UpdatedCreditCardRecord.getid());
         oldCreditCardRecord.setuserId(UpdatedCreditCardRecord.getuserId());
         oldCreditCardRecord.setcardName(UpdatedCreditCardRecord.getcardName());
@@ -28,19 +28,19 @@ public class CreditCardRecordImpl implements CreditCardService{
         oldCreditCardRecord.setannualFee(UpdatedCreditCardRecord.getannualFee());
         oldCreditCardRecord.setstatus(UpdatedCreditCardRecord.getstatus());
         oldCreditCardRecord.setcreatedAt(UpdatedCreditCardRecord.getcreatedAt());
-        return studentRepository.save(oldStudent);
+        return creditCardRecordRepository.save(oldCreditCardRecord);
         }
         return null;
     }
 
     @Override
     public CreditCardRecord getCardsByUser(Long userId){
-      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findByUserId(userId);
+      Optional<CreditCardRecord> optionalCreditCardRecord = creditCardRecordRepository.findByUserId(userId);
       return optionalCreditCardRecord.orElse(null);
     }
     @Override
     public CreditCardRecord getCardById(Long id){
-      Optional<CreditCardRecord> optionalCreditCardRecord = CreditCardRecordRepository.findById(id);
+      Optional<CreditCardRecord> optionalCreditCardRecord = creditCardRecordRepository.findById(id);
       return optionalCreditCardRecord.orElse(null);
     }
     @Override
