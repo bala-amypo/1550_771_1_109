@@ -21,17 +21,17 @@ public class CreditCardServiceImpl implements CreditCardService{
     }
     @Override
     public CreditCardRecord updateCard(Long id,CreditCardRecord updated){
-        Optional<CreditCardRecord> optionalCreditCardRecord = creditCardRecordRepository. findById(id);
-        if(optionalCreditCardRecord.isPresent()){
-        CreditCardRecord oldCreditCardRecord = optionalCreditCardRecord.get();
-        oldCreditCardRecord.setid(UpdatedCreditCardRecord.getid());
-        oldCreditCardRecord.setuserId(UpdatedCreditCardRecord.getuserId());
-        oldCreditCardRecord.setcardName(UpdatedCreditCardRecord.getcardName());
-        oldCreditCardRecord.setissuser(UpdatedCreditCardRecord.getissuser());
-        oldCreditCardRecord.setcardType(UpdatedCreditCardRecord.getcardType());
-        oldCreditCardRecord.setannualFee(UpdatedCreditCardRecord.getannualFee());
-        oldCreditCardRecord.setstatus(UpdatedCreditCardRecord.getstatus());
-        oldCreditCardRecord.setcreatedAt(UpdatedCreditCardRecord.getcreatedAt());
+        Optional<CreditCardRecord> optional = creditCardRecordRepository. findById(id);
+        if(optional.isPresent()){
+        CreditCardRecord existing = optional.get();
+        existing.setid(updated.getid());
+        existing.setuserId(updated.getuserId());
+        existing.setcardName(updated.getcardName());
+        existing.setissuser(updated.getissuser());
+        existing.setcardType(updated.getcardType());
+        existing.setannualFee(updated.getannualFee());
+        existing.setstatus(updated.getstatus());
+        existing.setcreatedAt(updated.getcreatedAt());
         return creditCardRecordRepository.save(oldCreditCardRecord);
         }
         return null;
