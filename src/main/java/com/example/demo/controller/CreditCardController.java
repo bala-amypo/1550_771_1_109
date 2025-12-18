@@ -37,14 +37,25 @@ public class CreditCardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreditCardRecord> getCardById(@PathVariable Long UserId) {
-        CreditCardRecord card = creditCardService.getCardsByUser(userId);
-        if (user != null) {
+    public ResponseEntity<CreditCardRecord> getCardById(@PathVariable Long id) {
+        CreditCardRecord card = creditCardService.getCardById(id);
+        if (card != null) {
             return ResponseEntity.status(200).body(card);
         }
         return ResponseEntity.status(404).build();
     }
-
+    @GetMapping
+    public List<CreditCardRecord> getAllcards() {
+        return creditCardService.getAllcards();
+    }
+    @PutMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(@PathVariable Long id,
+                                               @RequestParam boolean active) {
+        if (userProfileService.updateUserStatus(id, active) != null) {
+            return ResponseEntity.status(200).body("Status Updated Successfully");
+        }
+        return ResponseEntity.status(404).build();
+    }
 
 
 
