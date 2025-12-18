@@ -69,9 +69,9 @@ public class StudentServiceImpl implements StudentService{
     StudentRepository studentRepository;
     
     @Override
-    public Student updateStudent(int id,Student UpdatedStudent){
-        Optional<Student> optionalStudent = studentRepository. findById(id);
-        if(optionalStudent.isPresent()){
+    public CreditCardRecord updateCard(Long id,Student UpdatedStudent){
+        Optional<CreditCardRecord> optionalCreditCardRecord =CreditCardRecordRepository. findById(id);
+        if(optionalCreditCardRecord.isPresent()){
         Student oldStudent = optionalStudent.get();
         oldStudent. setName(UpdatedStudent.getName());
         oldStudent.setEmail(UpdatedStudent.getEmail());
@@ -80,7 +80,7 @@ public class StudentServiceImpl implements StudentService{
         return studentRepository.save(oldStudent);
         }
         return null;
-            }
+    }
 
     @Override
     public Student createStudent(Student student){
