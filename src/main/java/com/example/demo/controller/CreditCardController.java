@@ -23,7 +23,7 @@ public class CreditCardController {
     CreditCardService creditCardService;
 
     @PostMapping
-    public ResponseEntity<CreditCardRecord> createAll(@RequestBody CreditCardRecord creditCardRecord){
+    public ResponseEntity<CreditCardRecord> createCard(@RequestBody CreditCardRecord creditCardRecord){
           CreditCardRecord credit=creditCardService.createCard(creditCardRecord);
           return ResponseEntity.status(201).body(st);
     }
