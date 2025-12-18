@@ -11,7 +11,7 @@ import com.example.demo.repository.UserProfileRepository;
 import com.example.demo.service.UserProfileService;
 
 @Service
-public class UserProfileServiceImpl implements UserProfileService{
+public class UserProfileServiceImpl implements UserProfileService {
 
     @Autowired
     UserProfileRepository userProfileRepository;
