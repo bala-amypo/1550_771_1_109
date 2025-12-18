@@ -2,13 +2,13 @@ package com.example.demo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.UserProfile;
+import com.example.demo.entity.CreditCardRecord;
 
 @Service
-public interface UserProfileService {
+public interface CreditCardService {
     UserProfile addCard(CreditCardRecord card);
     UserProfile updateCard(Long id,CreditCardRecord updated);
-    UserProfile GetCardByUser(String userId);
-    UserProfile getAllUsers();
-    UserProfile updateUserStatus(Long id,boolean active);
+    UserProfile getCardsByUser(Long userId);
+    UserProfile getCardById(Long id);
+    UserProfile getAllCards();
 }
