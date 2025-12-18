@@ -28,10 +28,10 @@ public class CreditCardController {
           return ResponseEntity.status(201).body(card);
     }
 
-    public ResponseEntity<CreditCardRecord> getUserById(@PathVariable Long UserId) {
+    public ResponseEntity<CreditCardRecord> getCardsByUser(@PathVariable Long UserId) {
         CreditCardRecord card = creditCardService.getUserById(userId);
         if (user != null) {
-            return ResponseEntity.status(200).body(user);
+            return ResponseEntity.status(200).body(card);
         }
         return ResponseEntity.status(404).build();
     }
