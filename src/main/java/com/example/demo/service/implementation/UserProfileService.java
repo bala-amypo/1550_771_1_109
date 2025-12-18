@@ -24,6 +24,14 @@ public class UserProfileServiceImpl implements UserProfileService{
       Optional<UserProfile> optionalUserProfile = UserProfileRepository. findUserById(id);
       return optionalUserProfile .orElse(null);
     }
+    @Override
+    public UserProfile findByUserId(String userId){
+      return userProfileRepository.findByUserId(userId);
+    }
+    @Override
+    public List<Student> getStudent(){
+       return studentRepository.findAll();
+    }
 
     
     @Override
