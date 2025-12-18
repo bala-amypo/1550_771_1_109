@@ -1,14 +1,16 @@
-// package com.example.demo.service;
+package com.example.demo.service;
 
-// import org.springframework.stereotype.Service;
+import java.util.List;
 
-// import com.example.demo.entity.PurchaseIntentRecord;
-// import com.example.demo.entity.UserProfile;
+import com.example.demo.entity.RecommendationRecord;
 
-// @Service
-// public interface RecommendationEngineService {
-//     RecommendationRecord generateRecommendation(Long intentId);
-//     RecommendationRecord getIntentsbyUser(Long userId)
-//     RecommendationRecord getIntentById(Long id);
-//     RecommendationRecord getAllIntents();
-// }
+public interface RecommendationEngineService {
+
+    RecommendationRecord generateRecommendation(Long intentId);
+
+    RecommendationRecord getRecommendationById(Long id);
+
+    List<RecommendationRecord> getRecommendationsByUser(Long userId);
+
+    List<RecommendationRecord> getAllRecommendations();
+}
