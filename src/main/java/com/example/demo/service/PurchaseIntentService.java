@@ -1,14 +1,16 @@
-// package com.example.demo.service;
+package com.example.demo.service;
 
-// import org.springframework.stereotype.Service;
+import java.util.List;
 
-// import com.example.demo.entity.PurchaseIntentRecord;
-// import com.example.demo.entity.UserProfile;
+import com.example.demo.entity.PurchaseIntentRecord;
 
-// @Service
-// public interface PurchaseIntentService {
-//     PurchaseIntentRecord createIntent(PurchaseIntentRecord intent)
-//     PurchaseIntentRecord getIntentsbyUser(Long userId)
-//     PurchaseIntentRecord getIntentById(Long id);
-//     PurchaseIntentRecord getAllIntents();
-// }
+public interface PurchaseIntentService {
+
+    PurchaseIntentRecord createIntent(PurchaseIntentRecord intent);
+
+    List<PurchaseIntentRecord> getIntentsByUser(Long userId);
+
+    PurchaseIntentRecord getIntentById(Long id);
+
+    List<PurchaseIntentRecord> getAllIntents();
+}
