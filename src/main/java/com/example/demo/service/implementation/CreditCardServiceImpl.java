@@ -32,7 +32,7 @@ public class CreditCardServiceImpl implements CreditCardService{
         existing.setannualFee(updated.getannualFee());
         existing.setstatus(updated.getstatus());
         existing.setcreatedAt(updated.getcreatedAt());
-        return creditCardRecordRepository.save(oldCreditCardRecord);
+        return creditCardRecordRepository.save(existing);
         }
         return null;
     }
