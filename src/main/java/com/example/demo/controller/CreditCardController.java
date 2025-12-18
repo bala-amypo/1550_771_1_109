@@ -53,7 +53,7 @@ public class CreditCardController {
         return ResponseEntity.status(404).build();
     }
     @GetMapping
-    public List<CreditCardRecord> getAllcards() {
-        return creditCardService.getAllcards();
+    public List<CreditCardRecord> getAllCards() {
+        return creditCardService.getAllCards();
     }
 }
