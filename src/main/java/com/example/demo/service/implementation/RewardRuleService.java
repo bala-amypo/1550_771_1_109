@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.UserProfile;
-import com.example.demo.repository.UserProfileRepository;
-import com.example.demo.service.UserProfileService;
+import com.example.demo.entity.RewardRule;
+import com.example.demo.repository.RewardRuleRepository;
+import com.example.demo.service.RewardRuleService;
 
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
