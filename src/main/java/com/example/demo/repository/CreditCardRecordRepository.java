@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.entity.UserProfile;
 
 @Repository
-public interface CreditCardRecordRepository extends JpaRepository<UserProfile, Long> {
+public interface CreditCardRecordRepository extends JpaRepository<CreditCardRecord, Long> {
 
-    UserProfile findById(Long Id);
+    CreditCardRecord findById(Long Id);
 }
