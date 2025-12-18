@@ -16,10 +16,9 @@ public class CreditCardRecordImpl implements CreditCardService{
     CreditCardRecordRepository creditCardRecordRepository;
 
     @Override
-    public CreditCardRecord addCard(Long userId){
-      return creditCardRecordRepository.findByUserId(userId);
+    public CreditCardRecord addCard(CreditCardRecord card){
+      return creditCardRecordRepository.save(card);
     }
-
     @Override
     public CreditCardRecord updateCard(Long id,CreditCardRecord updated){
         Optional<CreditCardRecord> optionalCreditCardRecord = creditCardRecordRepository. findById(id);
@@ -37,7 +36,6 @@ public class CreditCardRecordImpl implements CreditCardService{
         }
         return null;
     }
-
     @Override
     public List<CreditCardRecord> getCardsByUser(Long userId){
       return creditCardRecordRepository.findByUserId(userId);
@@ -51,41 +49,4 @@ public class CreditCardRecordImpl implements CreditCardService{
     public List<CreditCardRecord> getAllCards(){
        return CreditCardRecordRepository.findAll();
     }
-
 }
-
-
-    @Override
-    public Student createStudent(Student student){
-       return studentRepository.save(student);
-    }
-    @Override
-    public List<Student> getStudent(){
-       return studentRepository.findAll();
-    }
-    @Override
-    public Student getById(int id){
-      Optional<Student> optionalStudent = studentRepository. findById(id);
-      return optionalStudent.orElse(null);
-    }
-    @Override
-    public boolean deleteStudent(int id){
-        if(studentRepository.existsById(id)){
-        studentRepository.deleteById(id);
-        return true;
-        }
-        return false;
-    }
-    @Override
-    public Student updateStudent(int id,Student UpdatedStudent){
-        Optional<Student> optionalStudent = studentRepository. findById(id);
-        if(optionalStudent.isPresent()){
-        Student oldStudent = optionalStudent.get();
-        oldStudent. setName(UpdatedStudent.getName());
-        oldStudent.setEmail(UpdatedStudent.getEmail());
-        oldStudent.setCourse(UpdatedStudent.getCourse());
-        oldStudent.setAge(UpdatedStudent.getAge());
-        return studentRepository.save(oldStudent);
-        }
-    return null;
-    }
