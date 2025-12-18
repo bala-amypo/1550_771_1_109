@@ -18,8 +18,15 @@ public class UserProfile{
     private boolean active;
     private LocalDateTime createdAt;
 
-    public UserProfile(){
-
+    public UserProfile(String userId, String fullName, String email, String password, String role, boolean active,
+            LocalDateTime createdAt) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.active = active;
+        this.createdAt = createdAt;
     }
     
     public void setId(Long id) {

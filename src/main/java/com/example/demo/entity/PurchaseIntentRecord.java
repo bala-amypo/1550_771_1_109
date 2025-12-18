@@ -1,77 +1,77 @@
-package com.example.demo.entity;
+// package com.example.demo.entity;
 
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.Id;
 
-@Entity 
-public class CreditCardRecorder{
+// @Entity 
+// public class CreditCardRecorder{
 
-    @Id
-    private Long id;
-    private Long userId;
-    private String cardName;
-    private String issuer;
-    private String cardType;
-    private Double annualFee;
-    private String status;
-    private LocalDateTime createdAt;
+//     @Id
+//     private Long id;
+//     private Long userId;
+//     private String cardName;
+//     private String issuer;
+//     private String cardType;
+//     private Double annualFee;
+//     private String status;
+//     private LocalDateTime createdAt;
 
-    public CreditCardRecorder(){
+//     public CreditCardRecorder(){
 
-    }
+//     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
-    }
-    public void setIssuer(String issuer) {
-        this.issuer = issuer;
-    }
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
-    public void setAnnualFee(Double annualFee) {
-        this.annualFee = annualFee;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+//     public void setId(Long id) {
+//         this.id = id;
+//     }
+//     public void setUserId(Long userId) {
+//         this.userId = userId;
+//     }
+//     public void setCardName(String cardName) {
+//         this.cardName = cardName;
+//     }
+//     public void setIssuer(String issuer) {
+//         this.issuer = issuer;
+//     }
+//     public void setCardType(String cardType) {
+//         this.cardType = cardType;
+//     }
+//     public void setAnnualFee(Double annualFee) {
+//         this.annualFee = annualFee;
+//     }
+//     public void setStatus(String status) {
+//         this.status = status;
+//     }
+//     public void setCreatedAt(LocalDateTime createdAt) {
+//         this.createdAt = createdAt;
+//     }
 
     
 
-    public Long getId() {
-        return id;
-    }
-    public Long getUserId() {
-        return userId;
-    }
-    public String getCardName() {
-        return cardName;
-    }
-    public String getIssuer() {
-        return issuer;
-    }
-    public String getCardType() {
-        return cardType;
-    }
-    public Double getAnnualFee() {
-        return annualFee;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+//     public Long getId() {
+//         return id;
+//     }
+//     public Long getUserId() {
+//         return userId;
+//     }
+//     public String getCardName() {
+//         return cardName;
+//     }
+//     public String getIssuer() {
+//         return issuer;
+//     }
+//     public String getCardType() {
+//         return cardType;
+//     }
+//     public Double getAnnualFee() {
+//         return annualFee;
+//     }
+//     public String getStatus() {
+//         return status;
+//     }
+//     public LocalDateTime getCreatedAt() {
+//         return createdAt;
+//     }
     
-}
+// }
