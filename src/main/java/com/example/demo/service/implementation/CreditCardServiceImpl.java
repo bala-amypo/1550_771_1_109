@@ -77,10 +77,10 @@ public class StudentServiceImpl implements StudentService{
         oldCreditCardRecord.setCardName(UpdatedStudent.getCardName());
         oldCreditCardRecord.setIssuer(UpdatedStudent.getIssuer());
         oldCreditCardRecord.setCardType(UpdatedStudent.getCardType());
-        oldCreditCardRecord.setAnnualFee(UpdatedStudent.getAge());
-        oldCreditCardRecord.setStatus(UpdatedStudent.getAge());
-        oldCreditCardRecord.setCreatedAt(UpdatedStudent.getAge());
-        return studentRepository.save(oldStudent);
+        oldCreditCardRecord.setAnnualFee(UpdatedStudent.getAnnualFee());
+        oldCreditCardRecord.setStatus(UpdatedStudent.getStatus());
+        oldCreditCardRecord.setCreatedAt(UpdatedStudent.getCreatedAt());
+        return studentRepository.save(oldCreditCardRecord);
         }
         return null;
     }
