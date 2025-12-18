@@ -24,14 +24,14 @@ public class CreditCardServiceImpl implements CreditCardService{
         Optional<CreditCardRecord> optional = creditCardRecordRepository. findById(id);
         if(optional.isPresent()){
         CreditCardRecord existing = optional.get();
-        existing.setid(updated.getid());
-        existing.setuserId(updated.getuserId());
-        existing.setcardName(updated.getcardName());
-        existing.setissuser(updated.getissuser());
-        existing.setcardType(updated.getcardType());
-        existing.setannualFee(updated.getannualFee());
-        existing.setstatus(updated.getstatus());
-        existing.setcreatedAt(updated.getcreatedAt());
+        existing.setId(updated.getid());
+        existing.setUserId(updated.getuserId());
+        existing.setCardName(updated.getcardName());
+        existing.setIssuser(updated.getissuser());
+        existing.setCardType(updated.getCardType());
+        existing.setAnnualFee(updated.getAnnualFee());
+        existing.setStatus(updated.getStatus());
+        existing.setCreatedAt(updated.getCreatedAt());
         return creditCardRecordRepository.save(existing);
         }
         return null;
