@@ -11,7 +11,7 @@ import com.example.demo.repository.CreditCardRecordRepository;
 import com.example.demo.service.CreditCardService;
 
 @Service
-public class CreditCardRecordImpl implements CreditCardService{
+public class CreditCardServiceImpl implements CreditCardService{
     @Autowired
     CreditCardRecordRepository creditCardRecordRepository;
 
