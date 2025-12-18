@@ -27,9 +27,9 @@ public class CreditCardController {
           CreditCardRecord card=creditCardService.addCard(creditCardRecord);
           return ResponseEntity.status(201).body(card);
     }
-
+    @GetMapping("/user/{userId}")
     public ResponseEntity<CreditCardRecord> getCardsByUser(@PathVariable Long UserId) {
-        CreditCardRecord card = creditCardService.getUserById(userId);
+        CreditCardRecord card = creditCardService.getCardsByUser(userId);
         if (user != null) {
             return ResponseEntity.status(200).body(card);
         }
