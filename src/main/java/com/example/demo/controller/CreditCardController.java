@@ -37,7 +37,7 @@ public class CreditCardController {
     }
     @GetMapping("/user/{userId}")
     public ResponseEntity<CreditCardRecord> getCardsByUser(@PathVariable Long userId) {
-        CreditCardRecord card = creditCardRecord.getCardsByUser(userId);
+        List<CreditCardRecord> card = creditCardRecord.getCardsByUser(userId);
         if (card != null) {
             return ResponseEntity.status(200).body(card);
         }
