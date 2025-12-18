@@ -27,7 +27,7 @@ public class CreditCardServiceImpl implements CreditCardService{
         existing.setId(updated.getId());
         existing.setUserId(updated.getUserId());
         existing.setCardName(updated.getCardName());
-        existing.setIssuer(updated.getIssuser());
+        existing.setIssuer(updated.getIssuer());
         existing.setCardType(updated.getCardType());
         existing.setAnnualFee(updated.getAnnualFee());
         existing.setStatus(updated.getStatus());
