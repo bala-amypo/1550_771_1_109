@@ -29,40 +29,19 @@ public class UserProfileServiceImpl implements UserProfileService{
       return userProfileRepository.findByUserId(userId);
     }
     @Override
-    public List<Student> getStudent(){
-       return studentRepository.findAll();
+    public List<UserProfile> getAllUsers(){
+       return userProfileRepository.findAll();
     }
-
     
     @Override
-    public List<Student> getStudent(){
-       return studentRepository.findAll();
-    }
-    @Override
-    public Student getById(int id){
-      Optional<Student> optionalStudent = studentRepository. findById(id);
-      return optionalStudent.orElse(null);
-    }
-    @Override
-    public boolean deleteStudent(int id){
-        if(studentRepository.existsById(id)){
-        studentRepository.deleteById(id);
-        return true;
-        }
-        return false;
-    }
-    @Override
-    public Student updateStudent(int id,Student UpdatedStudent){
-        Optional<Student> optionalStudent = studentRepository. findById(id);
-        if(optionalStudent.isPresent()){
-        Student oldStudent = optionalStudent.get();
-        oldStudent. setName(UpdatedStudent.getName());
-        oldStudent.setEmail(UpdatedStudent.getEmail());
-        oldStudent.setCourse(UpdatedStudent.getCourse());
-        oldStudent.setAge(UpdatedStudent.getAge());
-        return studentRepository.save(oldStudent);
+    public UserProfile updateUserStatus(Long id, boolean active) {
+        Optional<UserProfile> optionalUser = userProfileRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            UserProfile oldUser = optionalUser.get();
+            oldUser.setActive(active);
+            return userProfileRepository.save(oldUser);
         }
         return null;
-            }
+    }
 }
 
