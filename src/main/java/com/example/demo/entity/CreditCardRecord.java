@@ -2,78 +2,143 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "credit_card_records")
+@Table(name = "credit_cards")
 public class CreditCardRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "user_id")
-    private Long userId; // added for getUserId()
+    // Owning user of the card
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
-    @NotNull
-    @Column(name = "card_name")
-    private String cardName; // added for getCardName()
+    @Column(name = "card_name", nullable = false)
+    @NotBlank
+    private String cardName;
 
-    @NotNull
-    @Column(name = "issuer")
+    @Column(name = "issuer", nullable = false)
+    @NotBlank
     private String issuer;
 
-    @NotNull
-    @Column(name = "card_type")
+    @Column(name = "card_type", nullable = false)
+    @NotBlank
     private String cardType;
 
+    @Column(name = "annual_fee", nullable = false)
     @Min(0)
-    @NotNull
-    @Column(name = "annual_fee")
     private Double annualFee;
 
-    @NotNull
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status", nullable = false)
+    @NotBlank
+    private String status; // "ACTIVE" or "INACTIVE"
 
-    @Column(name = "created_at", updatable = false)
-    @org.hibernate.annotations.CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "creditCardRecord", cascade = CascadeType.ALL)
-    private List<RewardRule> rewardRules;
+    // Many-to-Many with UserProfile for favourite cards
+    @ManyToMany(mappedBy = "favouriteCards")
+    private Set<UserProfile> favouritedByUsers = new HashSet<>();
 
-    // Default constructor
-    public CreditCardRecord() {}
+    // One-to-Many with RewardRule
+    @OneToMany(mappedBy = "creditCard", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RewardRule> rewardRules = new HashSet<>();
+
+    public CreditCardRecord() {
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        if (this.status == null) {
+            this.status = "ACTIVE";
+        }
+        if (this.annualFee == null) {
+            this.annualFee = 0.0;
+        }
+    }
 
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getCardName() { return cardName; }
-    public void setCardName(String cardName) { this.cardName = cardName; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getIssuer() { return issuer; }
-    public void setIssuer(String issuer) { this.issuer = issuer; }
+    public Long getUserId() {
+        return userId;
+    }
 
-    public String getCardType() { return cardType; }
-    public void setCardType(String cardType) { this.cardType = cardType; }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-    public Double getAnnualFee() { return annualFee; }
-    public void setAnnualFee(Double annualFee) { this.annualFee = annualFee; }
+    public String getCardName() {
+        return cardName;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public String getIssuer() {
+        return issuer;
+    }
 
-    public List<RewardRule> getRewardRules() { return rewardRules; }
-    public void setRewardRules(List<RewardRule> rewardRules) { this.rewardRules = rewardRules; }
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
+    }
+
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public Double getAnnualFee() {
+        return annualFee;
+    }
+
+    public void setAnnualFee(Double annualFee) {
+        this.annualFee = annualFee;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public Set<UserProfile> getFavouritedByUsers() {
+        return favouritedByUsers;
+    }
+
+    public void setFavouritedByUsers(Set<UserProfile> favouritedByUsers) {
+        this.favouritedByUsers = favouritedByUsers;
+    }
+
+    public Set<RewardRule> getRewardRules() {
+        return rewardRules;
+    }
+
+    public void setRewardRules(Set<RewardRule> rewardRules) {
+        this.rewardRules = rewardRules;
+    }
 }
