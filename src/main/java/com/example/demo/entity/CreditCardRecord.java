@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,17 +19,21 @@ public class CreditCardRecord {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @NotNull 
     private UserProfile userProfile;
 
+    @NotNull 
     private Long userId;
 
     private String cardName;
     private String issuer;
     private String cardType;
 
-    @Min(0)
+    @Min(0) 
     private Double annualFee;
 
+    @NotNull
+    @Column(columnDefinition = "varchar(20) default 'ACTIVE'") // Ensure status is considered in reward calculations
     private String status;
 
     @CreationTimestamp
