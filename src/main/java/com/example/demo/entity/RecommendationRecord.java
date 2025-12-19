@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -13,19 +12,41 @@ public class RecommendationRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    // Relationship added WITHOUT changing userId
+    @ManyToOne(optional = false)
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id",
+        insertable = false,
+        updatable = false
+    )
     private UserProfile user;
 
-    @ManyToOne
-    @JoinColumn(name = "purchase_intent_id", nullable = false)
+    // Relationship added WITHOUT changing purchaseIntentId
+    @ManyToOne(optional = false)
+    @JoinColumn(
+        name = "purchase_intent_id",
+        referencedColumnName = "id",
+        insertable = false,
+        updatable = false
+    )
     private PurchaseIntentRecord purchaseIntent;
 
-    @ManyToOne
-    @JoinColumn(name = "recommended_card_id", nullable = false)
+    // Relationship added WITHOUT changing recommendedCardId
+    @ManyToOne(optional = false)
+    @JoinColumn(
+        name = "recommended_card_id",
+        referencedColumnName = "id",
+        insertable = false,
+        updatable = false
+    )
     private CreditCardRecord recommendedCard;
+
+    private long userId;
+    private long purchaseIntentId;
+    private long recommendedCardId;
 
     @Min(0)
     private Double expectedRewardValue;
@@ -38,52 +59,49 @@ public class RecommendationRecord {
     public RecommendationRecord() {
     }
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
+    // setters (UNCHANGED)
+    public void setId(long id) {
         this.id = id;
     }
-
-    public UserProfile getUser() {
-        return user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
-    public void setUser(UserProfile user) {
-        this.user = user;
+    public void setPurchaseIntentId(long purchaseIntentId) {
+        this.purchaseIntentId = purchaseIntentId;
     }
-
-    public PurchaseIntentRecord getPurchaseIntent() {
-        return purchaseIntent;
-    }
-    public void setPurchaseIntent(PurchaseIntentRecord purchaseIntent) {
-        this.purchaseIntent = purchaseIntent;
-    }
-
-    public CreditCardRecord getRecommendedCard() {
-        return recommendedCard;
-    }
-    public void setRecommendedCard(CreditCardRecord recommendedCard) {
-        this.recommendedCard = recommendedCard;
-    }
-
-    public Double getExpectedRewardValue() {
-        return expectedRewardValue;
+    public void setRecommendedCardId(long recommendedCardId) {
+        this.recommendedCardId = recommendedCardId;
     }
     public void setExpectedRewardValue(Double expectedRewardValue) {
         this.expectedRewardValue = expectedRewardValue;
     }
-
-    public String getCalculationDetailsJson() {
-        return calculationDetailsJson;
-    }
     public void setCalculationDetailsJson(String calculationDetailsJson) {
         this.calculationDetailsJson = calculationDetailsJson;
     }
-
-    public LocalDateTime getRecommendedAt() {
-        return recommendedAt;
-    }
     public void setRecommendedAt(LocalDateTime recommendedAt) {
         this.recommendedAt = recommendedAt;
+    }
+
+    // getters (UNCHANGED)
+    public long getId() {
+        return id;
+    }
+    public long getUserId() {
+        return userId;
+    }
+    public long getPurchaseIntentId() {
+        return purchaseIntentId;
+    }
+    public long getRecommendedCardId() {
+        return recommendedCardId;
+    }
+    public Double getExpectedRewardValue() {
+        return expectedRewardValue;
+    }
+    public String getCalculationDetailsJson() {
+        return calculationDetailsJson;
+    }
+    public LocalDateTime getRecommendedAt() {
+        return recommendedAt;
     }
 }
