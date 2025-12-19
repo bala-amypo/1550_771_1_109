@@ -1,125 +1,119 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name = "user_profiles", 
-       uniqueConstraints = {
-           @UniqueConstraint(columnNames = "userId"),
-           @UniqueConstraint(columnNames = "email")
-       })
+@Table(
+    name = "user_profiles",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_id"}),
+        @UniqueConstraint(columnNames = {"email"})
+    }
+)
 public class UserProfile {
 
-    @Id
+    @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String userId; 
+    @Column(name = "user_id", nullable = false, unique = true)
+    private String userId;
 
-    @NotBlank
     private String fullName;
 
     @Email
-    @NotBlank
-    private String email; 
+    @Column(nullable = false, unique = true)
+    private String email;
 
-    @NotBlank
-    private String password; 
+    private String password;
 
-    private String role = "USER"; 
+    @Column(columnDefinition = "VARCHAR(255) DEFAULT 'USER'")
+    private String role;
 
-    private Boolean active = true;
+    private boolean active;
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
+    // Many-to-Many favourite cards
     @ManyToMany
     @JoinTable(
         name = "user_favourite_cards",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "card_id")
+        joinColumns = @JoinColumn(name = "user_profile_id"),
+        inverseJoinColumns = @JoinColumn(name = "credit_card_id")
     )
-    private Set<CreditCardRecord> favouriteCards = new HashSet<>();
+    private Set<CreditCardRecord> favouriteCards;
 
+    // Default constructor (unchanged)
     public UserProfile() {
-        this.createdAt = LocalDateTime.now(); // auto-populate at creation
     }
 
-    public Long getId() {
-        return id;
+    public UserProfile(String userId, String fullName, String email, String password, String role, boolean active,
+            LocalDateTime createdAt) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.active = active;
+        this.createdAt = createdAt;
     }
 
+    // setters (unchanged)
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getUserId() {
-        return userId;
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
-    public String getFullName() {
-        return fullName;
-    }
-
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getRole() {
-        return role;
-    }
-
     public void setRole(String role) {
-        if (role != null) this.role = role; // maintain default if null
+        this.role = role;
     }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Set<CreditCardRecord> getFavouriteCards() {
-        return favouriteCards;
+    // getters (unchanged)
+    public Long getId() {
+        return id;
     }
-
-    public void setFavouriteCards(Set<CreditCardRecord> favouriteCards) {
-        this.favouriteCards = favouriteCards;
+    public String getUserId() {
+        return userId;
+    }
+    public String getFullName() {
+        return fullName;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public String getRole() {
+        return role;
+    }
+    public boolean isActive() {
+        return active;
+    }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }

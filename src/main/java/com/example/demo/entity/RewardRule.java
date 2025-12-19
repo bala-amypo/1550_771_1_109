@@ -16,10 +16,17 @@ public class RewardRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "card_id", nullable = false)
+    // Relationship added WITHOUT changing cardId
+    @ManyToOne(optional = false)
+    @JoinColumn(
+        name = "card_id",
+        referencedColumnName = "id",
+        insertable = false,
+        updatable = false
+    )
     private CreditCardRecord creditCard;
 
+    private Long cardId;
     private String category;
     private String rewardType;
 
@@ -31,45 +38,43 @@ public class RewardRule {
     public RewardRule() {
     }
 
-    public Long getId() {
-        return id;
-    }
+    // setters
     public void setId(Long id) {
         this.id = id;
     }
-
-    public CreditCardRecord getCreditCard() {
-        return creditCard;
-    }
-    public void setCreditCard(CreditCardRecord creditCard) {
-        this.creditCard = creditCard;
-    }
-
-    public String getCategory() {
-        return category;
+    public void setCardId(Long cardId) {
+        this.cardId = cardId;
     }
     public void setCategory(String category) {
         this.category = category;
     }
-
-    public String getRewardType() {
-        return rewardType;
-    }
     public void setRewardType(String rewardType) {
         this.rewardType = rewardType;
-    }
-
-    public Double getMultiplier() {
-        return multiplier;
     }
     public void setMultiplier(Double multiplier) {
         this.multiplier = multiplier;
     }
-
-    public boolean isActive() {
-        return active;
-    }
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    // getters
+    public Long getId() {
+        return id;
+    }
+    public Long getCardId() {
+        return cardId;
+    }
+    public String getCategory() {
+        return category;
+    }
+    public String getRewardType() {
+        return rewardType;
+    }
+    public Double getMultiplier() {
+        return multiplier;
+    }
+    public boolean isActive() {
+        return active;
     }
 }
