@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "recommendations")
 public class RecommendationRecord {
@@ -29,6 +31,8 @@ public class RecommendationRecord {
     private Double expectedRewardValue;
 
     private String calculationDetailsJson;
+
+    @CreationTimestamp
     private LocalDateTime recommendedAt;
 
     public RecommendationRecord() {
