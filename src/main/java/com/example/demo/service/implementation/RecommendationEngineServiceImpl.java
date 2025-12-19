@@ -24,9 +24,7 @@ public class RecommendationEngineServiceImpl
 
     @Override
     public RecommendationRecord generateRecommendation(Long intentId) {
-
-        Optional<PurchaseIntentRecord> optional =
-                intentRepository.findById(intentId);
+        Optional<PurchaseIntentRecord> optional =intentRepository.findById(intentId);
 
         if (optional.isEmpty()) return null;
 
