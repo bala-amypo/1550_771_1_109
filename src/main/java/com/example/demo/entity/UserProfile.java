@@ -4,68 +4,50 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(
-    name = "user_profiles",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id"}),
-        @UniqueConstraint(columnNames = {"email"})
-    }
-)
-public class UserProfile {
+@Table(name = "user_profiles",
+       uniqueConstraints = {
+           @UniqueConstraint(columnNames = "userId"),
+           @UniqueConstraint(columnNames = "email")
+       })
+public class UserProfile{
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false, unique = true)
     private String userId;
-
     private String fullName;
-
-    @Email
-    @Column(nullable = false, unique = true)
     private String email;
-
     private String password;
 
-    @Column(columnDefinition = "VARCHAR(255) DEFAULT 'USER'")
-    private String role;
+    @Column(nullable = false)
+    private String role = "USER"; // default value
 
     private boolean active;
 
-    @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    // Many-to-Many favourite cards
     @ManyToMany
     @JoinTable(
         name = "user_favourite_cards",
-        joinColumns = @JoinColumn(name = "user_profile_id"),
-        inverseJoinColumns = @JoinColumn(name = "credit_card_id")
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "card_id")
     )
     private Set<CreditCardRecord> favouriteCards;
 
-    // Default constructor (unchanged)
-    public UserProfile() {
+    public UserProfile(){
+
     }
 
-    public UserProfile(String userId, String fullName, String email, String password, String role, boolean active,
-            LocalDateTime createdAt) {
-        this.userId = userId;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.active = active;
-        this.createdAt = createdAt;
+    // AUTO-POPULATE createdAt when inserting
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 
-    // setters (unchanged)
     public void setId(Long id) {
         this.id = id;
     }
@@ -91,7 +73,6 @@ public class UserProfile {
         this.createdAt = createdAt;
     }
 
-    // getters (unchanged)
     public Long getId() {
         return id;
     }
@@ -116,4 +97,5 @@ public class UserProfile {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
 }
