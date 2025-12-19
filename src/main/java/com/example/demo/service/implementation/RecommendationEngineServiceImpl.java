@@ -33,7 +33,7 @@ public class RecommendationEngineServiceImpl
         RecommendationRecord rec = new RecommendationRecord();
         rec.setPurchaseIntentId(intent.getId());
         rec.setUserId(intent.getUserId());
-        rec.setRecommendedCardId("DEFAULT_CARD");
+        rec.setRecommendedCardId(0L);
         rec.setExpectedRewardValue(intent.getAmount() * 0.05); // simple calculation
 
         return recommendationRecordRepository.save(rec);
