@@ -1,53 +1,27 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "user_profiles",
-       uniqueConstraints = {
-           @UniqueConstraint(columnNames = "userId"),
-           @UniqueConstraint(columnNames = "email")
-       })
 public class UserProfile{
 
     @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String userId;
     private String fullName;
     private String email;
     private String password;
-
-    @Column(nullable = false)
-    private String role = "USER"; // default value
-
+    private String role;
     private boolean active;
-
-    @Column(updatable = false)
     private LocalDateTime createdAt;
-
-    @ManyToMany
-    @JoinTable(
-        name = "user_favourite_cards",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "card_id")
-    )
-    private Set<CreditCardRecord> favouriteCards;
 
     public UserProfile(){
 
     }
-
-    // AUTO-POPULATE createdAt when inserting
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -73,6 +47,7 @@ public class UserProfile{
         this.createdAt = createdAt;
     }
 
+    
     public Long getId() {
         return id;
     }
@@ -98,4 +73,5 @@ public class UserProfile{
         return createdAt;
     }
 
+    
 }

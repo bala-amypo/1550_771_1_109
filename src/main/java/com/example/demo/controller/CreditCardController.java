@@ -1,59 +1,67 @@
-package com.example.demo.controller;
+package com.example.demo.entity;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+public class CreditCardRecord{
+    private Long id;
+    private Long userId;
+    private String cardName;
+    private String issuer;
+    private String cardType;
+    private Double annualFee;
+    private String status;
+    private LocalDateTime createdAt;
 
-import com.example.demo.entity.CreditCardRecord;
-import com.example.demo.service.CreditCardService;
-
-@RestController
-@RequestMapping("/api/credits")
-public class CreditCardController {
-    @Autowired
-    CreditCardService creditCardService;
-
-    @PostMapping
-    public ResponseEntity<CreditCardRecord> createCard(@RequestBody CreditCardRecord creditCardRecord){
-          CreditCardRecord card=creditCardService.addCard(creditCardRecord);
-          return ResponseEntity.status(201).body(card);
+    public void setId(Long id) {
+        this.id = id;
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateCard(@PathVariable Long id,
-                                               @RequestBody CreditCardRecord creditCardRecord) {
-        if (creditCardService.updateCard(id, creditCardRecord) != null) {
-            return ResponseEntity.status(200).body("Card Updated Successfully");
-        }
-        return ResponseEntity.status(404).build();
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<CreditCardRecord>> getCardsByUser(@PathVariable Long userId) {
-        List<CreditCardRecord> card = creditCardService.getCardsByUser(userId);
-        if (card != null) {
-            return ResponseEntity.status(200).body(card);
-        }
-        return ResponseEntity.status(404).build();
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
+    }
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+    public void setAnnualFee(Double annualFee) {
+        this.annualFee = annualFee;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CreditCardRecord> getCardById(@PathVariable Long id) {
-        CreditCardRecord card = creditCardService.getCardById(id);
-        if (card != null) {
-            return ResponseEntity.status(200).body(card);
-        }
-        return ResponseEntity.status(404).build();
+    
+
+    public Long getId() {
+        return id;
     }
-    @GetMapping
-    public List<CreditCardRecord> getAllCards() {
-        return creditCardService.getAllCards();
+    public Long getUserId() {
+        return userId;
     }
+    public String getCardName() {
+        return cardName;
+    }
+    public String getIssuer() {
+        return issuer;
+    }
+    public String getCardType() {
+        return cardType;
+    }
+    public Double getAnnualFee() {
+        return annualFee;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    
 }
