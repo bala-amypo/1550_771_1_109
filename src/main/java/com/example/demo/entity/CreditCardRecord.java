@@ -17,23 +17,25 @@ public class CreditCardRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Many-to-One relationship with UserProfile
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @NotNull 
+    @NotNull // ensures a valid user
     private UserProfile userProfile;
 
-    @NotNull 
+    @Column(name = "user_id") // <-- fix duplicate mapping
+    @NotNull
     private Long userId;
 
     private String cardName;
     private String issuer;
     private String cardType;
 
-    @Min(0) 
+    @Min(0) // annualFee >= 0
     private Double annualFee;
 
     @NotNull
-    @Column(columnDefinition = "varchar(20) default 'ACTIVE'") // Ensure status is considered in reward calculations
+    @Column(columnDefinition = "varchar(20) default 'ACTIVE'") // status for reward calculation
     private String status;
 
     @CreationTimestamp
@@ -45,6 +47,7 @@ public class CreditCardRecord {
     public CreditCardRecord() {
     }
 
+    // ----- Setters -----
     public void setId(Long id) {
         this.id = id;
     }
@@ -70,6 +73,7 @@ public class CreditCardRecord {
         this.createdAt = createdAt;
     }
 
+    // ----- Getters -----
     public Long getId() {
         return id;
     }
