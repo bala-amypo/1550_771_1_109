@@ -14,7 +14,6 @@ public class CreditCardRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Many cards belong to one user
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserProfile user;
@@ -30,15 +29,12 @@ public class CreditCardRecord {
 
     private LocalDateTime createdAt;
 
-    // One card can have many reward rules
     @OneToMany(mappedBy = "creditCard")
     private List<RewardRule> rewardRules;
 
     public CreditCardRecord() {
         this.createdAt = LocalDateTime.now();
     }
-
-    // Getters and Setters
 
     public Long getId() {
         return id;

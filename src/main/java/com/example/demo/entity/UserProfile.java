@@ -21,19 +21,19 @@ public class UserProfile {
     private Long id;
 
     @NotBlank
-    private String userId; // unique business identifier
+    private String userId; 
 
     @NotBlank
     private String fullName;
 
     @Email
     @NotBlank
-    private String email; // must be unique
+    private String email; 
 
     @NotBlank
-    private String password; // encrypted login credential
+    private String password; 
 
-    private String role = "USER"; // default value
+    private String role = "USER"; 
 
     private Boolean active = true;
 
@@ -51,7 +51,6 @@ public class UserProfile {
         this.createdAt = LocalDateTime.now(); // auto-populate at creation
     }
 
-    // Getters and setters
     public Long getId() {
         return id;
     }

@@ -14,7 +14,6 @@ public class PurchaseIntentRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Many purchase intents belong to one user
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserProfile user;
@@ -26,14 +25,11 @@ public class PurchaseIntentRecord {
     private String merchant;
     private LocalDateTime intentDate;
 
-    // One intent can generate multiple recommendations
     @OneToMany(mappedBy = "purchaseIntent")
     private List<RecommendationRecord> recommendations;
 
     public PurchaseIntentRecord() {
     }
-
-    // Getters and Setters
 
     public Long getId() {
         return id;

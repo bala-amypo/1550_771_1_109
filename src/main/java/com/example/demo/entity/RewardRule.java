@@ -16,7 +16,6 @@ public class RewardRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Many reward rules belong to one credit card
     @ManyToOne
     @JoinColumn(name = "card_id", nullable = false)
     private CreditCardRecord creditCard;
@@ -31,8 +30,6 @@ public class RewardRule {
 
     public RewardRule() {
     }
-
-    // Getters and Setters
 
     public Long getId() {
         return id;
