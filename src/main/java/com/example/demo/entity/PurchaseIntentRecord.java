@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Min;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "purchase_intents")
-public class PurchaseIntentRecord {
+public class PurchaseIntent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,19 +20,21 @@ public class PurchaseIntentRecord {
     @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private UserProfile userProfile;
 
+    @Column(name = "user_id")
     private Long userId;
 
-    @Positive
+    private String itemName;
     private Double amount;
 
-    private String category;
-    private String merchant;
-    private LocalDateTime intentDate;
+    private String status;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "purchaseIntent", cascade = CascadeType.ALL)
-    private List<RecommendationRecord> recommendationRecords;
+    private List<RecommendationRecord> recommendations;
 
-    public PurchaseIntentRecord() {
+    public PurchaseIntent() {
     }
 
     public void setId(Long id) {
@@ -39,17 +43,17 @@ public class PurchaseIntentRecord {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
     public void setAmount(Double amount) {
         this.amount = amount;
     }
-    public void setCategory(String category) {
-        this.category = category;
+    public void setStatus(String status) {
+        this.status = status;
     }
-    public void setMerchant(String merchant) {
-        this.merchant = merchant;
-    }
-    public void setIntentDate(LocalDateTime intentDate) {
-        this.intentDate = intentDate;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -58,16 +62,16 @@ public class PurchaseIntentRecord {
     public Long getUserId() {
         return userId;
     }
+    public String getItemName() {
+        return itemName;
+    }
     public Double getAmount() {
         return amount;
     }
-    public String getCategory() {
-        return category;
+    public String getStatus() {
+        return status;
     }
-    public String getMerchant() {
-        return merchant;
-    }
-    public LocalDateTime getIntentDate() {
-        return intentDate;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 }
