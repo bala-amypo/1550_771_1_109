@@ -11,11 +11,9 @@ public class PurchaseIntentRecord{
     @Id
     private Long id;
     private Long userId;
-    private String cardName;
-    private String issuer;
-    private String cardType;
-    private Double annualFee;
-    private String status;
+    private double amount;
+    private String category;
+    private String merchant;
     private LocalDateTime createdAt;
 
     public PurchaseIntentRecord(){
