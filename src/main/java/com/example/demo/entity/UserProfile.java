@@ -1,91 +1,126 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class UserProfile{
+@Table(name = "user_profiles", 
+       uniqueConstraints = {
+           @UniqueConstraint(columnNames = "userId"),
+           @UniqueConstraint(columnNames = "email")
+       })
+public class UserProfile {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userId;
+
+    @NotBlank
+    private String userId; // unique business identifier
+
+    @NotBlank
     private String fullName;
-    private String email;
-    private String password;
-    private String role;
-    private boolean active;
+
+    @Email
+    @NotBlank
+    private String email; // must be unique
+
+    @NotBlank
+    private String password; // encrypted login credential
+
+    private String role = "USER"; // default value
+
+    private Boolean active = true;
+
     private LocalDateTime createdAt;
 
-    // Added default constructor for JPA
+    @ManyToMany
+    @JoinTable(
+        name = "user_favourite_cards",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "card_id")
+    )
+    private Set<CreditCardRecord> favouriteCards = new HashSet<>();
+
     public UserProfile() {
+        this.createdAt = LocalDateTime.now(); // auto-populate at creation
     }
 
-    public UserProfile(String userId, String fullName, String email, String password, String role, boolean active,
-            LocalDateTime createdAt) {
-        this.userId = userId;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.active = active;
-        this.createdAt = createdAt;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    
+    // Getters and setters
     public Long getId() {
         return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUserId() {
         return userId;
     }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getFullName() {
         return fullName;
     }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getEmail() {
         return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getRole() {
         return role;
     }
-    public boolean isActive() {
+
+    public void setRole(String role) {
+        if (role != null) this.role = role; // maintain default if null
+    }
+
+    public Boolean getActive() {
         return active;
     }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Set<CreditCardRecord> getFavouriteCards() {
+        return favouriteCards;
+    }
+
+    public void setFavouriteCards(Set<CreditCardRecord> favouriteCards) {
+        this.favouriteCards = favouriteCards;
+    }
 }
