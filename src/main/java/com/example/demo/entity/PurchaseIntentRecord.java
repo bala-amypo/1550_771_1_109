@@ -2,74 +2,54 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
-@Entity 
 public class PurchaseIntentRecord{
-
-    @Id
     private Long id;
     private Long userId;
-    private double amount;
+    private Double amount;
     private String category;
     private String merchant;
     private LocalDateTime intentDate;
 
     public PurchaseIntentRecord(){
-
+        
     }
-
+    
     public void setId(Long id) {
         this.id = id;
     }
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
-    public void setIssuer(String issuer) {
-        this.issuer = issuer;
+    public void setCategory(String category) {
+        this.category = category;
     }
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
     }
-    public void setAnnualFee(Double annualFee) {
-        this.annualFee = annualFee;
+    public void setIntentDate(LocalDateTime intentDate) {
+        this.intentDate = intentDate;
     }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    
-
     public Long getId() {
         return id;
     }
     public Long getUserId() {
         return userId;
     }
-    public String getCardName() {
-        return cardName;
+    public Double getAmount() {
+        return amount;
     }
-    public String getIssuer() {
-        return issuer;
+    public String getCategory() {
+        return category;
     }
-    public String getCardType() {
-        return cardType;
+    public String getMerchant() {
+        return merchant;
     }
-    public Double getAnnualFee() {
-        return annualFee;
+    public LocalDateTime getIntentDate() {
+        return intentDate;
     }
-    public String getStatus() {
-        return status;
-    }
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+
     
 }
