@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.PurchaseIntentRecord;
 import com.example.demo.entity.RecommendationRecord;
-import com.example.demo.repository.PurchaseIntentRepository;
+import com.example.demo.repository.PurchaseIntentRecordRepository;
 import com.example.demo.repository.RecommendationRecordRepository;
 import com.example.demo.service.RecommendationEngineService;
 
@@ -17,7 +17,7 @@ public class RecommendationEngineServiceImpl
         implements RecommendationEngineService {
 
     @Autowired
-    PurchaseIntentRepository intentRepository;
+    PurchaseIntentRecordRepository intentRepository;
 
     @Autowired
     RecommendationRecordRepository recommendationRecordRepository;
