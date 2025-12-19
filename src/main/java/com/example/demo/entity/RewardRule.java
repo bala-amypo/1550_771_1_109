@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class RewardRule{
+    @Id
     private Long id;
     private Long cardId;
     private String category;

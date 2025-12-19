@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class RecommendationRecord{
+    @Id
     private long id;
     private long userId;
     private long purchaseIntentId;
