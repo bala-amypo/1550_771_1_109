@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,9 +14,13 @@ public class CreditCardRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile userProfile;
+    @NotNull
+    @Column(name = "user_id")
+    private Long userId; // added for getUserId()
+
+    @NotNull
+    @Column(name = "card_name")
+    private String cardName; // added for getCardName()
 
     @NotNull
     @Column(name = "issuer")
@@ -50,8 +53,11 @@ public class CreditCardRecord {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public UserProfile getUserProfile() { return userProfile; }
-    public void setUserProfile(UserProfile userProfile) { this.userProfile = userProfile; }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
+
+    public String getCardName() { return cardName; }
+    public void setCardName(String cardName) { this.cardName = cardName; }
 
     public String getIssuer() { return issuer; }
     public void setIssuer(String issuer) { this.issuer = issuer; }
