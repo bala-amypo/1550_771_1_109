@@ -28,7 +28,7 @@ public class PurchaseIntentServiceImpl implements PurchaseIntentService {
 
     @Override
     public PurchaseIntentRecord getIntentById(Long id) {
-        Optional<PurchaseIntentRecord> optional = repository.findById(id);
+        Optional<PurchaseIntentRecord> optional = purchaseIntentRecordRepository.findById(id);
         return optional.orElse(null);
     }
 
