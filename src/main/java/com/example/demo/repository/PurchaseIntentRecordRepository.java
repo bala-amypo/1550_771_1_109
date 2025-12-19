@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.PurchaseIntentRecord;
 
-public interface PurchaseIntentRepository extends JpaRepository<PurchaseIntentRecord, Long> {
+public interface PurchaseIntentRecordRepository extends JpaRepository<PurchaseIntentRecord, Long> {
 
     List<PurchaseIntentRecord> findByUserId(Long userId);
 }
