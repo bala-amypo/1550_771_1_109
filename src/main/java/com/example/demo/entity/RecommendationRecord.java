@@ -1,40 +1,90 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
-
 @Entity
-@Table(name = "recommendation_records")
+@Table(name = "recommendations")
 public class RecommendationRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /* =======================
+       USER RELATIONSHIP
+       ======================= */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id",
+        insertable = false,
+        updatable = false
+    )
     private UserProfile userProfile;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private Long userId;
 
+    /* =======================
+       PURCHASE INTENT RELATIONSHIP
+       ======================= */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "purchase_intent_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(
+        name = "purchase_intent_id",
+        referencedColumnName = "id",
+        insertable = false,
+        updatable = false
+    )
     private PurchaseIntentRecord purchaseIntent;
 
-    @Column(name = "purchase_intent_id")
+    @Column(name = "purchase_intent_id", nullable = false)
     private Long purchaseIntentId;
 
+    /* =======================
+       CREDIT CARD RELATIONSHIP
+       ======================= */
+    @ManyToOne(optional = false)
+    @JoinColumn(
+        name = "recommended_card_id",
+        referencedColumnName = "id",
+        insertable = false,
+        updatable = false
+    )
+    private CreditCardRecord recommendedCard;
+
+    @Column(name = "recommended_card_id", nullable = false)
     private Long recommendedCardId;
+
+    /* =======================
+       BUSINESS FIELDS
+       ======================= */
+    @Min(0)
     private Double expectedRewardValue;
+
+    @Column(columnDefinition = "TEXT")
     private String calculationDetailsJson;
+
     private LocalDateTime recommendedAt;
 
+    /* =======================
+       CONSTRUCTOR
+       ======================= */
     public RecommendationRecord() {
     }
 
-    // Setters
+    /* =======================
+       AUTO TIMESTAMP
+       ======================= */
+    @PrePersist
+    protected void onCreate() {
+        this.recommendedAt = LocalDateTime.now();
+    }
+
+    /* =======================
+       SETTERS
+       ======================= */
     public void setId(Long id) {
         this.id = id;
     }
@@ -57,7 +107,9 @@ public class RecommendationRecord {
         this.recommendedAt = recommendedAt;
     }
 
-    // Getters
+    /* =======================
+       GETTERS
+       ======================= */
     public Long getId() {
         return id;
     }
