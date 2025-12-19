@@ -2,7 +2,13 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class PurchaseIntentRecord{
+
+    @Id
     private Long id;
     private Long userId;
     private Double amount;
@@ -11,7 +17,7 @@ public class PurchaseIntentRecord{
     private LocalDateTime intentDate;
 
     public PurchaseIntentRecord(){
-        
+
     }
     
     public void setId(Long id) {
