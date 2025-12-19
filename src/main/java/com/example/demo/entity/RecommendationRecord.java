@@ -2,6 +2,10 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class RecommendationRecord{
     private long id;
     private long userId;
