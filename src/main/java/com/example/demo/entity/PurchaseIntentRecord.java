@@ -14,7 +14,7 @@ public class PurchaseIntentRecord{
     private double amount;
     private String category;
     private String merchant;
-    private LocalDateTime createdAt;
+    private LocalDateTime intentDate;
 
     public PurchaseIntentRecord(){
 
