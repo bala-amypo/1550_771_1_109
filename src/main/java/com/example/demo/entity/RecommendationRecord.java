@@ -21,7 +21,7 @@ public class RecommendationRecord {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "purchase_intent_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private PurchaseIntent purchaseIntent;
+    private PurchaseIntentRecord purchaseIntent;
 
     @Column(name = "purchase_intent_id")
     private Long purchaseIntentId;
@@ -34,6 +34,7 @@ public class RecommendationRecord {
     public RecommendationRecord() {
     }
 
+    // Setters
     public void setId(Long id) {
         this.id = id;
     }
@@ -56,6 +57,7 @@ public class RecommendationRecord {
         this.recommendedAt = recommendedAt;
     }
 
+    // Getters
     public Long getId() {
         return id;
     }

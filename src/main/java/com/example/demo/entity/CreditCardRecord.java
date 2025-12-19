@@ -1,3 +1,14 @@
+package com.example.demo.entity;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "credit_cards")
 public class CreditCardRecord {
@@ -6,52 +17,76 @@ public class CreditCardRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Many-to-One relationship with UserProfile
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id") // references UserProfile.id
-    @NotNull
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private UserProfile userProfile;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
-    @NotNull
+    @Column(name = "user_id")
     private Long userId;
 
-    private String cardName;
-    private String issuer;
-    private String cardType;
-
-    @Min(0)
-    private Double annualFee;
+    @NotNull
+    private String cardNumber;
 
     @NotNull
-    @Column(columnDefinition = "varchar(20) default 'ACTIVE'")
-    private String status;
+    private String cardName;
 
+    @Min(1)
+    private Double creditLimit;
+
+    @NotNull
+    @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "creditCard", cascade = CascadeType.ALL)
     private List<RewardRule> rewardRules;
 
-    public CreditCardRecord() { }
+    public CreditCardRecord() {
+    }
 
-    // ----- Setters -----
-    public void setId(Long id) { this.id = id; }
-    public void setUserId(Long userId) { this.userId = userId; }
-    public void setCardName(String cardName) { this.cardName = cardName; }
-    public void setIssuer(String issuer) { this.issuer = issuer; }
-    public void setCardType(String cardType) { this.cardType = cardType; }
-    public void setAnnualFee(Double annualFee) { this.annualFee = annualFee; }
-    public void setStatus(String status) { this.status = status; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    // Setters
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+    public void setCreditLimit(Double creditLimit) {
+        this.creditLimit = creditLimit;
+    }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    public void setRewardRules(List<RewardRule> rewardRules) {
+        this.rewardRules = rewardRules;
+    }
 
-    // ----- Getters -----
-    public Long getId() { return id; }
-    public Long getUserId() { return userId; }
-    public String getCardName() { return cardName; }
-    public String getIssuer() { return issuer; }
-    public String getCardType() { return cardType; }
-    public Double getAnnualFee() { return annualFee; }
-    public String getStatus() { return status; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
+    // Getters
+    public Long getId() {
+        return id;
+    }
+    public Long getUserId() {
+        return userId;
+    }
+    public String getCardNumber() {
+        return cardNumber;
+    }
+    public String getCardName() {
+        return cardName;
+    }
+    public Double getCreditLimit() {
+        return creditLimit;
+    }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    public List<RewardRule> getRewardRules() {
+        return rewardRules;
+    }
 }
