@@ -20,7 +20,7 @@ public class RecommendationEngineServiceImpl
     PurchaseIntentRepository intentRepository;
 
     @Autowired
-    RecommendationRepository recommendationRepository;
+    RecommendationRecordRepository recommendationRecordRepository;
 
     @Override
     public RecommendationRecord generateRecommendation(Long intentId) {
@@ -38,21 +38,21 @@ public class RecommendationEngineServiceImpl
         rec.setRecommendedCard("DEFAULT_CARD");
         rec.setReward(intent.getAmount() * 0.05); // simple calculation
 
-        return recommendationRepository.save(rec);
+        return recommendationRecordRepository.save(rec);
     }
 
     @Override
     public RecommendationRecord getRecommendationById(Long id) {
-        return recommendationRepository.findById(id).orElse(null);
+        return recommendationRecordRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<RecommendationRecord> getRecommendationsByUser(Long userId) {
-        return recommendationRepository.findByUserId(userId);
+        return recommendationRecordRepository.findByUserId(userId);
     }
 
     @Override
     public List<RecommendationRecord> getAllRecommendations() {
-        return recommendationRepository.findAll();
+        return recommendationRecordRepository.findAll();
     }
 }
