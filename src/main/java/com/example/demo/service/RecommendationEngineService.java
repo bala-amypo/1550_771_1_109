@@ -1,16 +1,16 @@
-// package com.example.demo.service;
+package com.example.demo.service;
 
-// import java.util.List;
+import java.util.List;
 
-// import com.example.demo.entity.RecommendationRecord;
+import com.example.demo.entity.RecommendationRecord;
 
-// public interface RecommendationEngineService {
+public interface RecommendationEngineService {
 
-//     RecommendationRecord generateRecommendation(Long intentId);
+    RecommendationRecord generateRecommendation(Long intentId);
 
-//     RecommendationRecord getRecommendationById(Long id);
+    RecommendationRecord getRecommendationById(Long id);
 
-//     List<RecommendationRecord> getRecommendationsByUser(Long userId);
+    List<RecommendationRecord> getRecommendationsByUser(Long userId);
 
-//     List<RecommendationRecord> getAllRecommendations();
-// }
+    List<RecommendationRecord> getAllRecommendations();
+}

@@ -1,12 +1,12 @@
-// package com.example.demo.repository;
-// import java.util.List;
-// import org.springframework.data.jpa.repository.JpaRepository;
-// import org.springframework.stereotype.Repository;
+package com.example.demo.repository;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-// import com.example.demo.entity.RecommendationRecord;
+import com.example.demo.entity.RecommendationRecord;
 
-// @Repository
-// public interface RecommendationRecordRepository extends JpaRepository<RecommendationRecord,Long>{
-//     List<RecommendationRecord> findByUserId(Long userId);
+@Repository
+public interface RecommendationRecordRepository extends JpaRepository<RecommendationRecord,Long>{
+    List<RecommendationRecord> findByUserId(Long userId);
 
-// }
+}
