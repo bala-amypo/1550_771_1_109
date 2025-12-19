@@ -7,23 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.PurchaseIntentRecord;
-import com.example.demo.repository.PurchaseIntentRepository;
+import com.example.demo.repository.PurchaseIntentRecordRepository;
 import com.example.demo.service.PurchaseIntentService;
 
 @Service
 public class PurchaseIntentServiceImpl implements PurchaseIntentService {
 
     @Autowired
-    PurchaseIntentRepository repository;
+    PurchaseIntentRecordRepository purchaseIntentRecordRepository;
 
     @Override
     public PurchaseIntentRecord createIntent(PurchaseIntentRecord intent) {
-        return repository.save(intent);
+        return purchaseIntentRecordRepository.save(intent);
     }
 
     @Override
     public List<PurchaseIntentRecord> getIntentsByUser(Long userId) {
-        return repository.findByUserId(userId);
+        return purchaseIntentRecordRepository.findByUserId(userId);
     }
 
     @Override
@@ -34,6 +34,6 @@ public class PurchaseIntentServiceImpl implements PurchaseIntentService {
 
     @Override
     public List<PurchaseIntentRecord> getAllIntents() {
-        return repository.findAll();
+        return purchaseIntentRecordRepository.findAll();
     }
 }
