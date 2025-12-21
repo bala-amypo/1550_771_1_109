@@ -8,15 +8,30 @@ import jakarta.persistence.Id;
 @Entity
 public class RecommendationRecord{
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
+    @Column(nullable=false)
     private long userId;
+    @Column(nullable=false)
     private long purchaseIntentId;
+    @Column(nullable=false)
     private long recommendedCardId;
+    @Column(nullable=false)
+    @Min(0)
     private Double expectedRewardValue;
+    @Column(nullable=false)
     private String calculationDetailsJson;
+    @Column(nullable=false)
     private LocalDateTime recommendedAt;
 
-    
+    public RecommendationRecord(){
+
+    }
+    @PrePersist
+    public void onCreate() {
+        this.recommendedAt = LocalDateTime.now();
+    }
+
     public void setId(long id) {
         this.id = id;
     }

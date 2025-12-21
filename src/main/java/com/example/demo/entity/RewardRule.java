@@ -10,11 +10,16 @@ public class RewardRule{
     private Long id;
     @Column(nullable=false)
     private Long cardId;
-    
+    @Column(nullable=false)
     private String category;
+    @Column(nullable=false)
     private String rewardType;
+    @Column(nullable=false)
+    @Min(1)
     private Double multiplier;
+    @Column(nullable=false)
     private boolean active;
+
     public void setId(Long id) {
         this.id = id;
     }
