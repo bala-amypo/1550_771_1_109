@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RecommendationEngineServiceImpl implements RecommendationService {
+public class RecommendationEngineServiceImpl implements RecommendationEngineService {
 
     private final RecommendationRecordRepository recommendationRepo;
     private final PurchaseIntentRecordRepository intentRepo;
