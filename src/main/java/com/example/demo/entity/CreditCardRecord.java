@@ -17,7 +17,7 @@ public class CreditCardRecord {
     // FIX: Replaced userId with a proper relationship
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile user;
+    private UserProfile userId;
 
     private String cardName;
 

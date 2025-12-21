@@ -18,7 +18,7 @@ public class RewardRule {
     // Many-to-One → CreditCardRecord
     @ManyToOne
     @JoinColumn(name = "card_id", nullable = false)
-    private CreditCardRecord card;
+    private CreditCardRecord cardId;
 
     @NotBlank
     private String category; // Unique per card

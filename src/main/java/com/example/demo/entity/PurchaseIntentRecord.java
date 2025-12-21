@@ -17,7 +17,7 @@ public class PurchaseIntentRecord {
     // FIX: Replace userId with UserProfile
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile user;
+    private UserProfile userId;
 
     @Min(1)
     private Double amount;
@@ -36,7 +36,7 @@ public class PurchaseIntentRecord {
         this.intentDate = LocalDateTime.now();
     }
 
-    ublic PurchaseIntentRecord(){
+    public PurchaseIntentRecord(){
 
     }
 

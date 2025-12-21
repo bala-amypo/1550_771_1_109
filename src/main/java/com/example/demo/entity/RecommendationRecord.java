@@ -16,17 +16,17 @@ public class RecommendationRecord {
     // Many-to-One → UserProfile
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile user;
+    private UserProfile userId;
 
     // Many-to-One → PurchaseIntentRecord
     @ManyToOne
     @JoinColumn(name = "purchase_intent_id", nullable = false)
-    private PurchaseIntentRecord purchaseIntent;
+    private PurchaseIntentRecord purchaseIntentId;
 
     // Many-to-One → CreditCardRecord
     @ManyToOne
     @JoinColumn(name = "recommended_card_id", nullable = false)
-    private CreditCardRecord recommendedCard;
+    private CreditCardRecord recommendedCardId;
 
     @Min(0)
     private Double expectedRewardValue;
@@ -41,7 +41,10 @@ public class RecommendationRecord {
         this.recommendedAt = LocalDateTime.now();
     }
 
-    // ----- Getters & Setters -----
+    public RecommendationRecord(){
+
+    }
+
 
     public Long getId() {
         return id;
@@ -51,28 +54,28 @@ public class RecommendationRecord {
         this.id = id;
     }
 
-    public UserProfile getUser() {
+    public UserProfile getUserId() {
         return user;
     }
 
-    public void setUser(UserProfile user) {
+    public void setUserId(UserProfile userId) {
         this.user = user;
     }
 
-    public PurchaseIntentRecord getPurchaseIntent() {
-        return purchaseIntent;
+    public PurchaseIntentRecord getPurchaseIntentId() {
+        return purchaseIntentId;
     }
 
-    public void setPurchaseIntent(PurchaseIntentRecord purchaseIntent) {
-        this.purchaseIntent = purchaseIntent;
+    public void setPurchaseIntentId(PurchaseIntentRecord purchaseIntentId) {
+        this.purchaseIntent = purchaseIntentId;
     }
 
-    public CreditCardRecord getRecommendedCard() {
-        return recommendedCard;
+    public CreditCardRecord getRecommendedCardId() {
+        return recommendedCardId;
     }
 
-    public void setRecommendedCard(CreditCardRecord recommendedCard) {
-        this.recommendedCard = recommendedCard;
+    public void setRecommendedCardId(CreditCardRecord recommendedCardId) {
+        this.recommendedCard = recommendedCardId;
     }
 
     public Double getExpectedRewardValue() {
