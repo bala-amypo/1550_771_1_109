@@ -26,6 +26,7 @@ public class RewardRule{
 
     public RewardRule(){
     }
+    
     public void setId(Long id) {
         this.id = id;
     }
