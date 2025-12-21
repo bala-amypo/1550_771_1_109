@@ -1,71 +1,34 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "user_profile")
+@Table(
+    name = "reward_rules",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"card_id", "category"})
+)
+public class RewardRule {
 
-public class RewardRule{
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false)
-    private Long cardId;
-    @Column(nullable=false)
-    private String category;
-    @Column(nullable=false)
-    private String rewardType;
-    @Column(nullable=false)
+
+    // Many-to-One → CreditCardRecord
+    @ManyToOne
+    @JoinColumn(name = "card_id", nullable = false)
+    private CreditCardRecord card;
+
+    @NotBlank
+    private String category; // Unique per card
+
+    private String rewardType; // cashback / points
+
     @Min(1)
-    private Double multiplier;
-    @Column(nullable=false)
-    private boolean active;
+    private Double multiplier; // must be > 0
 
-    public RewardRule(){
-    
-    }
-     
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setCardId(Long cardId) {
-        this.cardId = cardId;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }
-    public void setRewardType(String rewardType) {
-        this.rewardType = rewardType;
-    }
-    public void setMultiplier(Double multiplier) {
-        this.multiplier = multiplier;
-    }
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-    public Long getId() {
-        return id;
-    }
-    public Long getCardId() {
-        return cardId;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public String getRewardType() {
-        return rewardType;
-    }
-    public Double getMultiplier() {
-        return multiplier;
-    }
-    public boolean isActive() {
-        return active;
-    }
+    private Boolean active = true;
 
-    
+    // Getters and Setters
 }

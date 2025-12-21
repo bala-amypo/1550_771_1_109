@@ -11,6 +11,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "recommendations")
+
 public class RecommendationRecord{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
