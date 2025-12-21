@@ -8,19 +8,32 @@ import jakarta.persistence.Id;
 @Entity
 public class CreditCardRecord{
     @Id
-    @GeneratedValue(strategy
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    Column(nullable=false)
     private Long userId;
+    Column(nullable=false)
     private String cardName;
+    Column(nullable=false)
     private String issuer;
+    Column(nullable=false)
     private String cardType;
+    Column(nullable=false)
+    @Min(0)
     private Double annualFee;
+    Column(nullable=false)
     private String status;
+    Column(nullable=false)
     private LocalDateTime createdAt;
 
     public void setId(Long id) {
         this.id = id;
     }
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+    
     public void setUserId(Long userId) {
         this.userId = userId;
     }
@@ -42,8 +55,6 @@ public class CreditCardRecord{
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
-    
 
     public Long getId() {
         return id;
