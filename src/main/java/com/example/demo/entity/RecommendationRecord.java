@@ -2,44 +2,45 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "recommendations")
+public class RecommendationRecord {
 
-public class RecommendationRecord{
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false)
-    private Long userId;
-    @Column(nullable=false)
-    private Long purchaseIntentId;
-    @Column(nullable=false)
-    private Long recommendedCardId;
-    @Column(nullable=false)
+
+    // Many-to-One → UserProfile
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserProfile user;
+
+    // Many-to-One → PurchaseIntentRecord
+    @ManyToOne
+    @JoinColumn(name = "purchase_intent_id", nullable = false)
+    private PurchaseIntentRecord purchaseIntent;
+
+    // Many-to-One → CreditCardRecord
+    @ManyToOne
+    @JoinColumn(name = "recommended_card_id", nullable = false)
+    private CreditCardRecord recommendedCard;
+
     @Min(0)
     private Double expectedRewardValue;
-    @Column(nullable=false)
+
+    @Column(columnDefinition = "TEXT")
     private String calculationDetailsJson;
-    @Column(nullable=false)
+
     private LocalDateTime recommendedAt;
 
-    public RecommendationRecord(){
-
-    }
     @PrePersist
     public void onCreate() {
         this.recommendedAt = LocalDateTime.now();
     }
-
-    public void setId(Long id) {
+     public void setId(Long id) {
         this.id = id;
     }
     public void setUserId(Long userId) {
@@ -81,4 +82,5 @@ public class RecommendationRecord{
     public LocalDateTime getRecommendedAt() {
         return recommendedAt;
     }
+
 }
