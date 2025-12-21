@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 @Entity
 public class CreditCardRecord{
     @Id
+    @GeneratedValue(strategy
     private Long id;
     private Long userId;
     private String cardName;
