@@ -4,7 +4,7 @@ import com.example.demo.entity.*;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.*;
-import com.example.demo.service.RecommendationEngineService;
+import com.example.demo.service.RecommendationService;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,15 +13,18 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RecommendationEngineServiceImpl implements RecommendationEngineService {
+public class RecommendationEngineServiceImpl implements RecommendationService {
 
     private final RecommendationRecordRepository recommendationRepo;
     private final PurchaseIntentRecordRepository intentRepo;
     private final RewardRuleRepository ruleRepo;
 
-    public RecommendationServiceEngineImpl(RecommendationRecordRepository recommendationRepo,
-                                     PurchaseIntentRecordRepository intentRepo,
-                                     RewardRuleRepository ruleRepo) {
+    // 🔴 CONSTRUCTOR NAME MUST MATCH CLASS NAME
+    public RecommendationEngineServiceImpl(
+            RecommendationRecordRepository recommendationRepo,
+            PurchaseIntentRecordRepository intentRepo,
+            RewardRuleRepository ruleRepo) {
+
         this.recommendationRepo = recommendationRepo;
         this.intentRepo = intentRepo;
         this.ruleRepo = ruleRepo;
@@ -55,16 +58,16 @@ public class RecommendationEngineServiceImpl implements RecommendationEngineServ
             throw new BadRequestException("No applicable reward rule found");
         }
 
-        RecommendationRecord recommendation = new RecommendationRecord();
-        recommendation.setUser(intent.getUser());
-        recommendation.setPurchaseIntent(intent);
-        recommendation.setRecommendedCard(bestRule.getCard());
-        recommendation.setExpectedRewardValue(maxReward);
-        recommendation.setCalculationDetailsJson(
+        RecommendationRecord rec = new RecommendationRecord();
+        rec.setUser(intent.getUser());
+        rec.setPurchaseIntent(intent);
+        rec.setRecommendedCard(bestRule.getCard());
+        rec.setExpectedRewardValue(maxReward);
+        rec.setCalculationDetailsJson(
                 "Amount * Multiplier = " + intent.getAmount() + " * " + bestRule.getMultiplier()
         );
 
-        return recommendationRepo.save(recommendation);
+        return recommendationRepo.save(rec);
     }
 
     @Override
