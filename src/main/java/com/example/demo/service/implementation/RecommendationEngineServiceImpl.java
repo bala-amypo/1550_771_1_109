@@ -4,7 +4,7 @@ import com.example.demo.entity.*;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.*;
-import com.example.demo.service.RecommendationService;
+import com.example.demo.service.RecommendationEngineService;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class RecommendationServiceImpl implements RecommendationService {
+public class RecommendationEngineServiceImpl implements RecommendationEngineService {
 
     private final RecommendationRecordRepository recommendationRepo;
     private final PurchaseIntentRecordRepository intentRepo;
