@@ -1,43 +1,33 @@
 package com.example.demo.entity;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "purchase_intents")
-public class PurchaseIntentRecord {
+@Table(name = "")
 
+public class PurchaseIntentRecord{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-
-    // Many-to-One → UserProfile
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile user;
-
-    @Min(1)
+    @Column(nullable=false)
+    private Long userId;
+    @Column(nullable=false)
+    @Min(0)
     private Double amount;
-
-    @NotBlank
+    @Column(nullable=false)
     private String category;
-
+    @Column(nullable=false)
     private String merchant;
-
+    @Column(nullable=false)
     private LocalDateTime intentDate;
 
-    // One-to-Many → Recommendations
-    @OneToMany(mappedBy = "purchaseIntent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RecommendationRecord> recommendations;
-
-    @PrePersist
-    public void onCreate() {
-        this.intentDate = LocalDateTime.now();
-    }
 
     
     public void setId(Long id) {
@@ -77,4 +67,6 @@ public class PurchaseIntentRecord {
     public LocalDateTime getIntentDate() {
         return intentDate;
     }
+
+    
 }

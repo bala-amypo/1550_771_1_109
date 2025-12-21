@@ -44,6 +44,9 @@ public class CreditCardRecord {
         this.createdAt = LocalDateTime.now();
     }
 
+    public CreditCardRecord(){
+
+    }
     public void setUserId(Long userId) {
         this.userId = userId;
     }

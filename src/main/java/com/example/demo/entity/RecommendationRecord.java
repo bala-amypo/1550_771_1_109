@@ -40,7 +40,11 @@ public class RecommendationRecord {
     public void onCreate() {
         this.recommendedAt = LocalDateTime.now();
     }
-     public void setId(Long id) {
+
+    public RecommendationRecord(){
+
+    }
+    public void setId(Long id) {
         this.id = id;
     }
     public void setUserId(Long userId) {
