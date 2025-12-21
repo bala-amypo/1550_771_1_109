@@ -8,11 +8,18 @@ import jakarta.persistence.Id;
 @Entity
 public class PurchaseIntentRecord{
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable=false)
     private Long userId;
+    @Column(nullable=false)
+    @Min(0)
     private Double amount;
+    @Column(nullable=false)
     private String category;
+    @Column(nullable=false)
     private String merchant;
+    @Column(nullable=false)
     private LocalDateTime intentDate;
 
 

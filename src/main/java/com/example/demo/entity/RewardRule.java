@@ -6,8 +6,11 @@ import jakarta.persistence.Id;
 @Entity
 public class RewardRule{
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable=false)
     private Long cardId;
+    
     private String category;
     private String rewardType;
     private Double multiplier;
