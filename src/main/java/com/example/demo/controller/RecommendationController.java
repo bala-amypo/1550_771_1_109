@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.RecommendationRecord;
-import com.example.demo.service.RecommendationService;
+import com.example.demo.service.RecommendationEngineService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/recommendations")
 public class RecommendationController {
 
-    private final RecommendationService recommendationService;
+    private final RecommendationEngineService recommendationService;
 
-    public RecommendationController(RecommendationService recommendationService) {
+    public RecommendationController(RecommendationEngineService recommendationService) {
         this.recommendationService = recommendationService;
     }
 
