@@ -11,6 +11,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "credit_cards")
 public class CreditCardRecord{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

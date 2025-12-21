@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 
 @Entity
+@Table(name = "user_profile")
+
 public class RewardRule{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
