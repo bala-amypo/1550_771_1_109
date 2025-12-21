@@ -9,13 +9,21 @@ import jakarta.persistence.Id;
 public class UserProfile{
 
     @Id 
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable=false,unique=true)
     private String userId;
+    @Column(nullable=false)
     private String fullName;
+    @Column(nullable=false)
     private String email;
+    @Column(nullable=false)
     private String password;
+    @Column(nullable=false)
     private String role;
+    @Column(nullable=false)
     private boolean active;
+    @Column(nullable=false)
     private LocalDateTime createdAt;
 
     public UserProfile(){
