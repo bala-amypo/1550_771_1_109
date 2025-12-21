@@ -14,12 +14,11 @@ public class PurchaseIntentRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // FIX: Replace userId with UserProfile
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile userId;
+    private UserProfile user;
 
-    @Min(1)
+    @Min(0)
     private Double amount;
 
     private String category;
@@ -36,46 +35,25 @@ public class PurchaseIntentRecord {
         this.intentDate = LocalDateTime.now();
     }
 
-    public PurchaseIntentRecord(){
+    // -------- Getters & Setters --------
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    }
+    public UserProfile getUser() { return user; }
+    public void setUser(UserProfile user) { this.user = user; }
 
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-    public void setCategory(String category) {
-        this.category = category;
-    }
-    public void setMerchant(String merchant) {
-        this.merchant = merchant;
-    }
-    public void setIntentDate(LocalDateTime intentDate) {
-        this.intentDate = intentDate;
-    }
-    
-    public Long getId() {
-        return id;
-    }
-    public Long getUserId() {
-        return userId;
-    }
-    public Double getAmount() {
-        return amount;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public String getMerchant() {
-        return merchant;
-    }
-    public LocalDateTime getIntentDate() {
-        return intentDate;
-    }
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
+
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public String getMerchant() { return merchant; }
+    public void setMerchant(String merchant) { this.merchant = merchant; }
+
+    public LocalDateTime getIntentDate() { return intentDate; }
+    public void setIntentDate(LocalDateTime intentDate) { this.intentDate = intentDate; }
+
+    public List<RecommendationRecord> getRecommendations() { return recommendations; }
+    public void setRecommendations(List<RecommendationRecord> recommendations) { this.recommendations = recommendations; }
 }

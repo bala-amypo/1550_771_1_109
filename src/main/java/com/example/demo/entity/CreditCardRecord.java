@@ -14,10 +14,9 @@ public class CreditCardRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // FIX: Replaced userId with a proper relationship
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile userId;
+    private UserProfile user;
 
     private String cardName;
 
@@ -40,50 +39,31 @@ public class CreditCardRecord {
         this.createdAt = LocalDateTime.now();
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
-    }
-    public void setIssuer(String issuer) {
-        this.issuer = issuer;
-    }
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
-    }
-    public void setAnnualFee(Double annualFee) {
-        this.annualFee = annualFee;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    // -------- Getters & Setters --------
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
-    public Long getUserId() {
-        return userId;
-    }
-    public String getCardName() {
-        return cardName;
-    }
-    public String getIssuer() {
-        return issuer;
-    }
-    public String getCardType() {
-        return cardType;
-    }
-    public Double getAnnualFee() {
-        return annualFee;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+    public UserProfile getUser() { return user; }
+    public void setUser(UserProfile user) { this.user = user; }
+
+    public String getCardName() { return cardName; }
+    public void setCardName(String cardName) { this.cardName = cardName; }
+
+    public String getIssuer() { return issuer; }
+    public void setIssuer(String issuer) { this.issuer = issuer; }
+
+    public String getCardType() { return cardType; }
+    public void setCardType(String cardType) { this.cardType = cardType; }
+
+    public Double getAnnualFee() { return annualFee; }
+    public void setAnnualFee(Double annualFee) { this.annualFee = annualFee; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public List<RewardRule> getRewardRules() { return rewardRules; }
+    public void setRewardRules(List<RewardRule> rewardRules) { this.rewardRules = rewardRules; }
 }

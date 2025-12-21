@@ -6,28 +6,22 @@ import java.util.Set;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(
-    name = "user_profiles",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = "userId"),
-        @UniqueConstraint(columnNames = "email")
-    }
-)
+@Table(name = "user_profiles")
 public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String userId;
+    @Column(unique = true, nullable = false)
+    private String userId; // business identifier
 
     private String fullName;
 
     @Email
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String password;
@@ -50,67 +44,33 @@ public class UserProfile {
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    // -------- Getters & Setters --------
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
-    public Long getId() {
-        return id;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 
-    public String getUserId() {
-        return userId;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }    
+    public Set<CreditCardRecord> getFavouriteCards() { return favouriteCards; }
+    public void setFavouriteCards(Set<CreditCardRecord> favouriteCards) { this.favouriteCards = favouriteCards; }
 }
