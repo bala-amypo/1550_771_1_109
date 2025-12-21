@@ -1,34 +1,42 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
 @Entity
-@Table(
-    name = "reward_rules",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"card_id", "category"})
-)
-public class RewardRule {
+@Table(name = "purchase_intents")
+public class PurchaseIntentRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // FIX: Replace cardId with relation
+    // FIX: Replace userId with UserProfile
     @ManyToOne
-    @JoinColumn(name = "card_id", nullable = false)
-    private CreditCardRecord card;
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserProfile user;
+
+    @Min(1)
+    private Double amount;
 
     private String category;
 
-    private String rewardType;
+    private String merchant;
 
-    @Min(1)
-    private Double multiplier;
+    private LocalDateTime intentDate;
 
-    private Boolean active = true;
+    @OneToMany(mappedBy = "purchaseIntent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecommendationRecord> recommendations;
 
-    public PurchaseIntentRecord(){
+    @PrePersist
+    public void prePersist() {
+        this.intentDate = LocalDateTime.now();
+    }
+
+    ublic PurchaseIntentRecord(){
 
     }
 
