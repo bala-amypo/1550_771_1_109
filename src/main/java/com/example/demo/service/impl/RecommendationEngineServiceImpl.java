@@ -19,7 +19,7 @@ public class RecommendationEngineServiceImpl implements RecommendationEngineServ
     private final PurchaseIntentRecordRepository intentRepo;
     private final RewardRuleRepository ruleRepo;
 
-    public RecommendationServiceImpl(RecommendationRecordRepository recommendationRepo,
+    public RecommendationServiceEngineImpl(RecommendationRecordRepository recommendationRepo,
                                      PurchaseIntentRecordRepository intentRepo,
                                      RewardRuleRepository ruleRepo) {
         this.recommendationRepo = recommendationRepo;
