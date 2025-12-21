@@ -1,20 +1,7 @@
-package com.example.demo.repository;
+package com.example.demo.service;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import com.example.demo.entity.PurchaseIntentRecord;
+import com.example.demo.entity.UserProfile;
 
-import java.util.List;
-
-@Repository
-public interface PurchaseIntentRecordRepository extends JpaRepository<PurchaseIntentRecord, Long> {
-
-    // Find all purchase intents by a user
-    List<PurchaseIntentRecord> findByUserId(Long userId);
-
-    // Find all purchase intents by category
-    List<PurchaseIntentRecord> findByCategory(String category);
-
-    // Find all purchase intents by user and category
-    List<PurchaseIntentRecord> findByUserIdAndCategory(Long userId, String category);
+public interface UserProfileService {
+    UserProfile register(UserProfile user);
 }

@@ -1,10 +1,8 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "purchase_intents")
@@ -14,46 +12,76 @@ public class PurchaseIntentRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Double amount;
+    private String category;
+    private String merchant;
+    private LocalDateTime intentDate = LocalDateTime.now();
+
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
     private UserProfile user;
 
-    @Min(0)
-    private Double amount;
-
-    private String category;
-
-    private String merchant;
-
-    private LocalDateTime intentDate;
-
-    @OneToMany(mappedBy = "purchaseIntent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "purchaseIntent")
     private List<RecommendationRecord> recommendations;
 
-    @PrePersist
-    public void prePersist() {
-        this.intentDate = LocalDateTime.now();
+    public Long getId() {
+        return id;
     }
 
-    // -------- Getters & Setters --------
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Double getAmount() {
+        return amount;
+    }
 
-    public UserProfile getUser() { return user; }
-    public void setUser(UserProfile user) { this.user = user; }
+    public String getCategory() {
+        return category;
+    }
 
-    public Double getAmount() { return amount; }
-    public void setAmount(Double amount) { this.amount = amount; }
+    public String getMerchant() {
+        return merchant;
+    }
 
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
+    public LocalDateTime getIntentDate() {
+        return intentDate;
+    }
 
-    public String getMerchant() { return merchant; }
-    public void setMerchant(String merchant) { this.merchant = merchant; }
+    public UserProfile getUser() {
+        return user;
+    }
 
-    public LocalDateTime getIntentDate() { return intentDate; }
-    public void setIntentDate(LocalDateTime intentDate) { this.intentDate = intentDate; }
+    public List<RecommendationRecord> getRecommendations() {
+        return recommendations;
+    }
 
-    public List<RecommendationRecord> getRecommendations() { return recommendations; }
-    public void setRecommendations(List<RecommendationRecord> recommendations) { this.recommendations = recommendations; }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
+    }
+
+    public void setIntentDate(LocalDateTime intentDate) {
+        this.intentDate = intentDate;
+    }
+
+    public void setUser(UserProfile user) {
+        this.user = user;
+    }
+
+    public void setRecommendations(List<RecommendationRecord> recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    
+
+    // getters and setters
+
+    
 }
