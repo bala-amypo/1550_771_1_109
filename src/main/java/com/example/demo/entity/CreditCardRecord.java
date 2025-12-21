@@ -5,7 +5,6 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "credit_cards")
@@ -15,15 +14,13 @@ public class CreditCardRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Many-to-One → UserProfile
+    // FIX: Replaced userId with a proper relationship
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private UserProfile user;  // Must reference a valid user
+    private UserProfile user;
 
-    @NotBlank
     private String cardName;
 
-    @NotBlank
     private String issuer;
 
     private String cardType;
@@ -31,22 +28,18 @@ public class CreditCardRecord {
     @Min(0)
     private Double annualFee;
 
-    private String status; // ACTIVE / INACTIVE
+    private String status;
 
     private LocalDateTime createdAt;
 
-    // One-to-Many with RewardRule
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RewardRule> rewardRules;
 
     @PrePersist
-    public void onCreate() {
+    public void prePersist() {
         this.createdAt = LocalDateTime.now();
     }
 
-    public CreditCardRecord(){
-
-    }
     public void setUserId(Long userId) {
         this.userId = userId;
     }

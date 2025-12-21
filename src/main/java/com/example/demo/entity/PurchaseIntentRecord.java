@@ -1,33 +1,36 @@
 package com.example.demo.entity;
 
-import java.time.LocalDateTime;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
 @Entity
-@Table(name = "")
+@Table(
+    name = "reward_rules",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"card_id", "category"})
+)
+public class RewardRule {
 
-public class PurchaseIntentRecord{
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false)
-    private Long userId;
-    @Column(nullable=false)
-    @Min(0)
-    private Double amount;
-    @Column(nullable=false)
-    private String category;
-    @Column(nullable=false)
-    private String merchant;
-    @Column(nullable=false)
-    private LocalDateTime intentDate;
 
+    // FIX: Replace cardId with relation
+    @ManyToOne
+    @JoinColumn(name = "card_id", nullable = false)
+    private CreditCardRecord card;
+
+    private String category;
+
+    private String rewardType;
+
+    @Min(1)
+    private Double multiplier;
+
+    private Boolean active = true;
+
+    public PurchaseIntentRecord(){
+
+    }
 
     
     public void setId(Long id) {
@@ -67,6 +70,4 @@ public class PurchaseIntentRecord{
     public LocalDateTime getIntentDate() {
         return intentDate;
     }
-
-    
 }

@@ -23,25 +23,21 @@ public class UserProfile {
     private Long id;
 
     @NotBlank
-    private String userId; // Unique business identifier
+    private String userId;
 
-    @NotBlank
     private String fullName;
 
     @Email
-    @NotBlank
-    private String email;  // Must be unique
+    private String email;
 
-    @NotBlank
-    private String password; // Encrypted
+    private String password;
 
-    private String role = "USER"; // Defaults to USER
+    private String role = "USER";
 
     private Boolean active = true;
 
     private LocalDateTime createdAt;
 
-    // Many-to-Many with CreditCardRecord
     @ManyToMany
     @JoinTable(
         name = "user_favourite_cards",
@@ -50,18 +46,9 @@ public class UserProfile {
     )
     private Set<CreditCardRecord> favouriteCards = new HashSet<>();
 
-    public UserProfile(){
-
-    }
     @PrePersist
-    public void onCreate() {
+    public void prePersist() {
         this.createdAt = LocalDateTime.now();
-        if (this.role == null) {
-            this.role = "USER";
-        }
-        if (this.active == null) {
-            this.active = true;
-        }
     }
     public void setId(Long id) {
         this.id = id;
@@ -125,6 +112,5 @@ public class UserProfile {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
+    }    
 }
