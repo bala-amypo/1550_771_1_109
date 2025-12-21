@@ -5,3 +5,7 @@ import com.example.demo.entity.*;
 
 import java.util.List;
 import java.util.Optional;
+
+public interface RecommendationRecordRepository extends JpaRepository<RecommendationRecord, Long> {
+    List<RecommendationRecord> findByUserId(Long userId);
+}

@@ -1,8 +1,11 @@
-package com.example.demo.service;
+package com.example.demo.repository;
 
-import com.example.demo.entity.UserProfile;
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.entity.*;
 
-public interface RecommendationService {
-    RecommendationRecord generate(Long intentId);
+import java.util.List;
+import java.util.Optional;
+
+public interface PurchaseIntentRecordRepository extends JpaRepository<PurchaseIntentRecord, Long> {
+    List<PurchaseIntentRecord> findByUserId(Long userId);
 }
-
