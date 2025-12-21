@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.CreditCardRecord;
 import com.example.demo.entity.RewardRule;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.CreditCardRecordRepository;
 import com.example.demo.repository.RewardRuleRepository;
@@ -29,11 +30,11 @@ public class RewardRuleServiceImpl implements RewardRuleService {
     public RewardRule addRule(Long cardId, RewardRule rule) {
 
         if (rule.getMultiplier() <= 0) {
-            throw new IllegalArgumentException("Multiplier must be greater than 0");
+            throw new BadRequestException("Multiplier must be greater than 0");
         }
 
         CreditCardRecord card = cardRepo.findById(cardId)
-                .orElseThrow(() -> new ResourceNotFoundException("Card not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Credit card not found"));
 
         rule.setCard(card);
         return ruleRepo.save(rule);

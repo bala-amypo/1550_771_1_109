@@ -1,7 +1,7 @@
-
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.*;
+import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.*;
 import com.example.demo.service.RecommendationService;
@@ -39,8 +39,8 @@ public class RecommendationServiceImpl implements RecommendationService {
         double maxReward = 0;
 
         for (RewardRule rule : rules) {
-            if (rule.getCategory().equalsIgnoreCase(intent.getCategory())
-                    && rule.getActive()) {
+            if (rule.getActive()
+                    && rule.getCategory().equalsIgnoreCase(intent.getCategory())) {
 
                 double reward = intent.getAmount() * rule.getMultiplier();
 
@@ -52,7 +52,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         }
 
         if (bestRule == null) {
-            throw new IllegalArgumentException("No applicable reward rule found");
+            throw new BadRequestException("No applicable reward rule found");
         }
 
         RecommendationRecord recommendation = new RecommendationRecord();
@@ -65,5 +65,10 @@ public class RecommendationServiceImpl implements RecommendationService {
         );
 
         return recommendationRepo.save(recommendation);
+    }
+
+    @Override
+    public List<RecommendationRecord> getRecommendationsByUser(Long userId) {
+        return recommendationRepo.findByUserId(userId);
     }
 }
