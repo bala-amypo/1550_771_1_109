@@ -6,72 +6,93 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.*;
 import com.example.demo.service.RecommendationEngineService;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.*;
 
-import java.util.List;
-
-@Service
-@Transactional
 public class RecommendationEngineServiceImpl implements RecommendationEngineService {
 
-    private final RecommendationRecordRepository recommendationRepo;
     private final PurchaseIntentRecordRepository intentRepo;
+    private final UserProfileRepository userRepo;
+    private final CreditCardRecordRepository cardRepo;
     private final RewardRuleRepository ruleRepo;
+    private final RecommendationRecordRepository recRepo;
 
-    // 🔴 CONSTRUCTOR NAME MUST MATCH CLASS NAME
     public RecommendationEngineServiceImpl(
-            RecommendationRecordRepository recommendationRepo,
             PurchaseIntentRecordRepository intentRepo,
-            RewardRuleRepository ruleRepo) {
-
-        this.recommendationRepo = recommendationRepo;
+            UserProfileRepository userRepo,
+            CreditCardRecordRepository cardRepo,
+            RewardRuleRepository ruleRepo,
+            RecommendationRecordRepository recRepo
+    ) {
         this.intentRepo = intentRepo;
+        this.userRepo = userRepo;
+        this.cardRepo = cardRepo;
         this.ruleRepo = ruleRepo;
+        this.recRepo = recRepo;
     }
 
     @Override
-    public RecommendationRecord generate(Long intentId) {
+    public RecommendationRecord generateRecommendation(Long intentId) {
 
         PurchaseIntentRecord intent = intentRepo.findById(intentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Purchase intent not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Intent not found"));
 
-        List<RewardRule> rules = ruleRepo.findAll();
+        UserProfile user = userRepo.findById(intent.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        RewardRule bestRule = null;
-        double maxReward = 0;
+        if (!Boolean.TRUE.equals(user.getActive()))
+            throw new BadRequestException("User is not active");
 
-        for (RewardRule rule : rules) {
-            if (rule.getActive()
-                    && rule.getCategory().equalsIgnoreCase(intent.getCategory())) {
+        List<CreditCardRecord> activeCards = cardRepo.findActiveCardsByUser(user.getId());
 
+        if (activeCards.isEmpty())
+            throw new BadRequestException("No active cards available");
+
+        double bestReward = -1;
+        Long bestCardId = null;
+
+        for (CreditCardRecord card : activeCards) {
+            List<RewardRule> rules =
+                    ruleRepo.findActiveRulesForCardCategory(card.getId(), intent.getCategory());
+
+            for (RewardRule rule : rules) {
                 double reward = intent.getAmount() * rule.getMultiplier();
-
-                if (reward > maxReward) {
-                    maxReward = reward;
-                    bestRule = rule;
+                if (reward > bestReward) {
+                    bestReward = reward;
+                    bestCardId = card.getId();
                 }
             }
         }
 
-        if (bestRule == null) {
-            throw new BadRequestException("No applicable reward rule found");
-        }
+        if (bestCardId == null)
+            throw new BadRequestException("No reward rules available");
 
         RecommendationRecord rec = new RecommendationRecord();
-        rec.setUser(intent.getUser());
-        rec.setPurchaseIntent(intent);
-        rec.setRecommendedCard(bestRule.getCard());
-        rec.setExpectedRewardValue(maxReward);
+        rec.setUserId(user.getId());
+        rec.setPurchaseIntentId(intent.getId());
+        rec.setRecommendedCardId(bestCardId);
+        rec.setExpectedRewardValue(bestReward);
+
         rec.setCalculationDetailsJson(
-                "Amount * Multiplier = " + intent.getAmount() + " * " + bestRule.getMultiplier()
+                "{\"intentAmount\":" + intent.getAmount() +
+                ",\"bestReward\":" + bestReward + "}"
         );
 
-        return recommendationRepo.save(rec);
+        return recRepo.save(rec);
+    }
+
+    @Override
+    public RecommendationRecord getRecommendationById(Long id) {
+        return recRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recommendation not found"));
     }
 
     @Override
     public List<RecommendationRecord> getRecommendationsByUser(Long userId) {
-        return recommendationRepo.findByUserId(userId);
+        return recRepo.findByUserId(userId);
+    }
+
+    @Override
+    public List<RecommendationRecord> getAllRecommendations() {
+        return recRepo.findAll();
     }
 }
