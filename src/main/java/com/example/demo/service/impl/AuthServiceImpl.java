@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import org.springframework.stereotype.Service;
 import com.example.demo.dto.JwtResponse;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
@@ -11,7 +12,7 @@ import com.example.demo.service.AuthService;
 import com.example.demo.service.UserProfileService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
+@Service
 public class AuthServiceImpl implements AuthService {
 
     private final UserProfileService userService;
