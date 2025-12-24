@@ -10,61 +10,34 @@ public class RewardRule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long cardId;
+
     private String category;
+
     private String rewardType;
+
     private Double multiplier;
-    private Boolean active = true;
 
-    @ManyToOne
-    private CreditCardRecord card;
+    private Boolean active;
 
-    public Long getId() {
-        return id;
-    }
+    public RewardRule() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getCategory() {
-        return category;
-    }
+    public Long getCardId() { return cardId; }
+    public void setCardId(Long cardId) { this.cardId = cardId; }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 
-    public String getRewardType() {
-        return rewardType;
-    }
+    public String getRewardType() { return rewardType; }
+    public void setRewardType(String rewardType) { this.rewardType = rewardType; }
 
-    public void setRewardType(String rewardType) {
-        this.rewardType = rewardType;
-    }
+    public Double getMultiplier() { return multiplier; }
+    public void setMultiplier(Double multiplier) { this.multiplier = multiplier; }
 
-    public Double getMultiplier() {
-        return multiplier;
-    }
-
-    public void setMultiplier(Double multiplier) {
-        this.multiplier = multiplier;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public CreditCardRecord getCard() {
-        return card;
-    }
-
-    public void setCard(CreditCardRecord card) {
-        this.card = card;
-    }
-
-    // getters and setters
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }

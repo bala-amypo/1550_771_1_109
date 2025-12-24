@@ -11,77 +11,45 @@ public class RecommendationRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long userId;
+
+    private Long purchaseIntentId;
+
+    private Long recommendedCardId;
+
     private Double expectedRewardValue;
+
+    @Column(columnDefinition = "TEXT")
     private String calculationDetailsJson;
-    private LocalDateTime recommendedAt = LocalDateTime.now();
 
-    @ManyToOne
-    private UserProfile user;
+    private LocalDateTime recommendedAt;
 
-    @ManyToOne
-    private PurchaseIntentRecord purchaseIntent;
+    public RecommendationRecord() {}
 
-    @ManyToOne
-    private CreditCardRecord recommendedCard;
-
-    public void setId(Long id) {
-        this.id = id;
+    @PrePersist
+    public void prePersist() {
+        this.recommendedAt = LocalDateTime.now();
     }
 
-    public void setExpectedRewardValue(Double expectedRewardValue) {
-        this.expectedRewardValue = expectedRewardValue;
-    }
+    // Getters & Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setCalculationDetailsJson(String calculationDetailsJson) {
-        this.calculationDetailsJson = calculationDetailsJson;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public void setRecommendedAt(LocalDateTime recommendedAt) {
-        this.recommendedAt = recommendedAt;
-    }
+    public Long getPurchaseIntentId() { return purchaseIntentId; }
+    public void setPurchaseIntentId(Long purchaseIntentId) { this.purchaseIntentId = purchaseIntentId; }
 
-    public void setUser(UserProfile user) {
-        this.user = user;
-    }
+    public Long getRecommendedCardId() { return recommendedCardId; }
+    public void setRecommendedCardId(Long recommendedCardId) { this.recommendedCardId = recommendedCardId; }
 
-    public void setPurchaseIntent(PurchaseIntentRecord purchaseIntent) {
-        this.purchaseIntent = purchaseIntent;
-    }
+    public Double getExpectedRewardValue() { return expectedRewardValue; }
+    public void setExpectedRewardValue(Double expectedRewardValue) { this.expectedRewardValue = expectedRewardValue; }
 
-    public void setRecommendedCard(CreditCardRecord recommendedCard) {
-        this.recommendedCard = recommendedCard;
-    }
+    public String getCalculationDetailsJson() { return calculationDetailsJson; }
+    public void setCalculationDetailsJson(String calculationDetailsJson) { this.calculationDetailsJson = calculationDetailsJson; }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Double getExpectedRewardValue() {
-        return expectedRewardValue;
-    }
-
-    public String getCalculationDetailsJson() {
-        return calculationDetailsJson;
-    }
-
-    public LocalDateTime getRecommendedAt() {
-        return recommendedAt;
-    }
-
-    public UserProfile getUser() {
-        return user;
-    }
-
-    public PurchaseIntentRecord getPurchaseIntent() {
-        return purchaseIntent;
-    }
-
-    public CreditCardRecord getRecommendedCard() {
-        return recommendedCard;
-    }
-
-    
-    // getters and setters
-
-    
+    public LocalDateTime getRecommendedAt() { return recommendedAt; }
+    public void setRecommendedAt(LocalDateTime recommendedAt) { this.recommendedAt = recommendedAt; }
 }
