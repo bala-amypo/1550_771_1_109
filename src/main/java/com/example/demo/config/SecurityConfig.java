@@ -46,10 +46,12 @@ public class SecurityConfig {
                                 "/swagger-ui.html"
                         ).permitAll()
 
-                        // ⭐ User Profile APIs (POST allowed, prevents 403)
+                        // ⭐ FIX: Correct User Profile endpoints
+                        // Your controller uses @RequestMapping("/users")
+                        // So the correct paths are /users and /users/**
                         .requestMatchers(
-                                "/user",
-                                "/user/**"
+                                "/users",
+                                "/users/**"
                         ).permitAll()
 
                         // ⭐ Public health endpoint
