@@ -1,37 +1,30 @@
-// package com.example.demo.dto;
+package com.example.demo.dto;
 
-// public class JwtResponse {
-    
-// }
+public class JwtResponse {
 
-// UserProfileService
-// createUser(UserProfile profile)
-// getUserById(Long id);
-// findByUserId(String userId);
-// getAllUsers();
-// updateUserStatus(Long id,boolean active);
+    private String token;
+    private Long userId;
+    private String email;
+    private String role;
 
-// CreditCardService
-// addCard(CreditCarRecord card);
-// UpdateCard(Long id,CreditCardRecord updated);
-// getCardsByUser(Long userId)
-// getCardById(Long id)
-// getAllCards()
+    public JwtResponse() {}
 
-// RewardRuleService
-// createRule(RewardRule rule)
-// updateRule(Long id,RewardRule updated)
-// getRulesByCard(Long cardId)
-// getActiveRules()
-// getAllRules()
+    public JwtResponse(String token, Long userId, String email, String role) {
+        this.token = token;
+        this.userId = userId;
+        this.email = email;
+        this.role = role;
+    }
 
-// PurchaseIntentService
-// createIntent(PurchaseIntentRecord intent)
-// hetIntentbyUser(Long userId)
-// getAllIntents()
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 
-// RecommendationEngineService
-// generateRecommendation(Long intentId)
-// getRecommendationById(Long id)
-// getRecommendationByUser(Long userId)
-// getAllRecommendations()
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+}
