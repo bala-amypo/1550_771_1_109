@@ -5,7 +5,13 @@ import java.util.List;
 
 public interface RewardRuleService {
 
-    RewardRule addRule(Long cardId, RewardRule rule);
+    RewardRule createRule(RewardRule rule);
+
+    RewardRule updateRule(Long id, RewardRule updated);
 
     List<RewardRule> getRulesByCard(Long cardId);
+
+    List<RewardRule> getActiveRules();
+
+    List<RewardRule> getAllRules();
 }

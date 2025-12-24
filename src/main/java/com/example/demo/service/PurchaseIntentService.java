@@ -5,7 +5,11 @@ import java.util.List;
 
 public interface PurchaseIntentService {
 
-    PurchaseIntentRecord createIntent(Long userId, PurchaseIntentRecord intent);
+    PurchaseIntentRecord createIntent(PurchaseIntentRecord intent);
 
     List<PurchaseIntentRecord> getIntentsByUser(Long userId);
+
+    PurchaseIntentRecord getIntentById(Long id);
+
+    List<PurchaseIntentRecord> getAllIntents();
 }
