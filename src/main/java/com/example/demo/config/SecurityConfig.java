@@ -32,14 +32,30 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+
+                        // ⭐ Public Authentication APIs
                         .requestMatchers(
                                 "/auth/register",
-                                "/auth/login",
-                                "/simple-status",
+                                "/auth/login"
+                        ).permitAll()
+
+                        // ⭐ Swagger / Docs Public
+                        .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
+
+                        // ⭐ User Profile APIs (POST allowed, prevents 403)
+                        .requestMatchers(
+                                "/user",
+                                "/user/**"
+                        ).permitAll()
+
+                        // ⭐ Public health endpoint
+                        .requestMatchers("/simple-status").permitAll()
+
+                        // ⭐ All other endpoints require authentication
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
