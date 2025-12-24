@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
 import com.example.demo.dto.JwtResponse;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
@@ -12,6 +11,8 @@ import com.example.demo.service.AuthService;
 import com.example.demo.service.UserProfileService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Service;
+
 @Service
 public class AuthServiceImpl implements AuthService {
 
@@ -42,9 +43,7 @@ public class AuthServiceImpl implements AuthService {
         user.setRole(req.getRole());
 
         UserProfile saved = userService.createUser(user);
-
         String token = jwtUtil.generateToken(saved.getId(), saved.getEmail(), saved.getRole());
-
         return new JwtResponse(token, saved.getId(), saved.getEmail(), saved.getRole());
     }
 
@@ -61,7 +60,6 @@ public class AuthServiceImpl implements AuthService {
             throw new BadRequestException("User is not active");
 
         String token = jwtUtil.generateToken(user.getId(), user.getEmail(), user.getRole());
-
         return new JwtResponse(token, user.getId(), user.getEmail(), user.getRole());
     }
 }

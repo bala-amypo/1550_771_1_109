@@ -1,15 +1,16 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
 import com.example.demo.entity.UserProfile;
 import com.example.demo.exception.BadRequestException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserProfileRepository;
 import com.example.demo.service.UserProfileService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
+
+@Service  // Make sure this is here
 public class UserProfileServiceImpl implements UserProfileService {
 
     private final UserProfileRepository userRepo;
