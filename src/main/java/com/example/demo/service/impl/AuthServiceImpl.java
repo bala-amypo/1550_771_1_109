@@ -26,6 +26,7 @@ public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    // EXACT constructor order as per Technical Constraints Step 0
     public AuthServiceImpl(
             UserProfileService userService,
             UserProfileRepository userProfileRepository,
@@ -49,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(req.getPassword());
         user.setRole(req.getRole() != null ? req.getRole() : "USER");
         
-        // userId logic: use provided or generate unique string
+        // Use userId from request if available, otherwise generate one
         String userIdValue = (req.getUserId() != null && !req.getUserId().isEmpty()) 
                              ? req.getUserId() 
                              : UUID.randomUUID().toString();
