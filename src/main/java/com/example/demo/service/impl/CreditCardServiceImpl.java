@@ -18,11 +18,16 @@ public class CreditCardServiceImpl implements CreditCardService {
         this.cardRepo = cardRepo;
     }
 
+    @Override
     public CreditCardRecord addCard(CreditCardRecord card) {
-        if (card.getAnnualFee() < 0) throw new BadRequestException("Fee must be non-negative");
+        // FIX: Check if annualFee is not null before comparing it to 0
+        if (card.getAnnualFee() != null && card.getAnnualFee() < 0) {
+            throw new BadRequestException("Fee must be non-negative");
+        }
         return cardRepo.save(card);
     }
 
+    @Override
     public CreditCardRecord updateCard(Long id, CreditCardRecord updated) {
         CreditCardRecord existing = getCardById(id);
         existing.setCardName(updated.getCardName());
@@ -31,11 +36,18 @@ public class CreditCardServiceImpl implements CreditCardService {
         return cardRepo.save(existing);
     }
 
-    public List<CreditCardRecord> getCardsByUser(Long userId) { return cardRepo.findByUserId(userId); }
+    @Override
+    public List<CreditCardRecord> getCardsByUser(Long userId) {
+        return cardRepo.findByUserId(userId);
+    }
 
+    @Override
     public CreditCardRecord getCardById(Long id) {
         return cardRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Card not found"));
     }
 
-    public List<CreditCardRecord> getAllCards() { return cardRepo.findAll(); }
+    @Override
+    public List<CreditCardRecord> getAllCards() {
+        return cardRepo.findAll();
+    }
 }
