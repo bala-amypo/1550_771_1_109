@@ -20,6 +20,7 @@ public class RecommendationEngineServiceImpl implements RecommendationEngineServ
     private final RewardRuleRepository ruleRepo;
     private final RecommendationRecordRepository recRepo;
 
+    // Exact constructor order required by the Technical Constraints (Step 0)
     public RecommendationEngineServiceImpl(
             PurchaseIntentRecordRepository intentRepo,
             UserProfileRepository userRepo,
@@ -35,25 +36,35 @@ public class RecommendationEngineServiceImpl implements RecommendationEngineServ
 
     @Override
     public RecommendationRecord generateRecommendation(Long intentId) {
+        // 1. Fetch the target PurchaseIntentRecord
         PurchaseIntentRecord intent = intentRepo.findById(intentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Intent not found"));
 
-        List<CreditCardRecord> activeCards = cardRepo.findActiveCardsByUser(intent.getUserId());
+        // 2. Load associated UserProfile and check if active
+        UserProfile user = userRepo.findById(intent.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         
+        if (user.getActive() != null && !user.getActive()) {
+            throw new BadRequestException("User is not active");
+        }
+
+        // 3. Query active cards for the user
+        List<CreditCardRecord> activeCards = cardRepo.findActiveCardsByUser(intent.getUserId());
         if (activeCards == null || activeCards.isEmpty()) {
             throw new BadRequestException("No active cards available");
         }
 
         CreditCardRecord bestCard = null;
-        double maxReward = -1.0;
+        double maxRewardValue = -1.0;
 
+        // 4. Calculate best reward
         for (CreditCardRecord card : activeCards) {
             List<RewardRule> rules = ruleRepo.findActiveRulesForCardCategory(card.getId(), intent.getCategory());
             if (rules != null) {
                 for (RewardRule rule : rules) {
-                    double reward = intent.getAmount() * rule.getMultiplier();
-                    if (reward > maxReward) {
-                        maxReward = reward;
+                    double currentReward = intent.getAmount() * rule.getMultiplier();
+                    if (currentReward > maxRewardValue) {
+                        maxRewardValue = currentReward;
                         bestCard = card;
                     }
                 }
@@ -61,12 +72,33 @@ public class RecommendationEngineServiceImpl implements RecommendationEngineServ
         }
 
         if (bestCard == null) {
-            throw new BadRequestException("No valid reward rule found");
+            throw new BadRequestException("No valid reward rule found for category: " + intent.getCategory());
         }
 
-        RecommendationRecord rec = new RecommendationRecord();
-        rec.setUserId(intent.getUserId());
-        rec.setPurchaseIntentId(intentId);
-        rec.setRecommendedCardId(bestCard.getId());
-        rec.setExpectedRewardValue(maxReward);
-        rec.setCalculationDetailsJson("{\"reward\":" + maxReward + "}");
+        // 5. Persist and return RecommendationRecord
+        RecommendationRecord record = new RecommendationRecord();
+        record.setUserId(intent.getUserId());
+        record.setPurchaseIntentId(intentId);
+        record.setRecommendedCardId(bestCard.getId());
+        record.setExpectedRewardValue(maxRewardValue);
+        record.setCalculationDetailsJson("{\"calculatedReward\":" + maxRewardValue + "}");
+        
+        return recRepo.save(record);
+    }
+
+    @Override
+    public RecommendationRecord getRecommendationById(Long id) {
+        return recRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Recommendation not found"));
+    }
+
+    @Override
+    public List<RecommendationRecord> getRecommendationsByUser(Long userId) {
+        return recRepo.findByUserId(userId);
+    }
+
+    @Override
+    public List<RecommendationRecord> getAllRecommendations() {
+        return recRepo.findAll();
+    }
+}
