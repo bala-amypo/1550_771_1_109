@@ -3,36 +3,26 @@ package com.example.demo.controller;
 import com.example.demo.entity.UserProfile;
 import com.example.demo.service.UserProfileService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserProfileController {
+    private final UserProfileService service;
+    public UserProfileController(UserProfileService service) { this.service = service; }
 
-    private final UserProfileService userService;
-
-    public UserProfileController(UserProfileService userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping
-    public UserProfile create(@RequestBody UserProfile profile) {
-        return userService.createUser(profile);
-    }
+    @PostMapping("/register")
+    public UserProfile register(@RequestBody UserProfile profile) { return service.createUser(profile); }
 
     @GetMapping("/{id}")
-    public UserProfile getById(@PathVariable Long id) {
-        return userService.getUserById(id);
-    }
+    public UserProfile get(@PathVariable Long id) { return service.getUserById(id); }
 
     @GetMapping
-    public List<UserProfile> getAll() {
-        return userService.getAllUsers();
-    }
+    public List<UserProfile> list() { return service.getAllUsers(); }
 
     @PutMapping("/{id}/status")
-    public UserProfile updateStatus(@PathVariable Long id, @RequestParam boolean active) {
-        return userService.updateUserStatus(id, active);
-    }
+    public UserProfile updateStatus(@PathVariable Long id, @RequestParam boolean active) { return service.updateUserStatus(id, active); }
+
+    @GetMapping("/lookup/{userId}")
+    public UserProfile lookup(@PathVariable String userId) { return service.findByUserId(userId); }
 }
