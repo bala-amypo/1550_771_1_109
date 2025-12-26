@@ -43,9 +43,9 @@ public class SecurityConfig {
                     "/webjars/**"
                 ).permitAll()
                 
-                // ✅ FIX: Permit ALL methods (GET, PUT, POST) for /api/users
-                // This stops the 403 Forbidden for the 'status' update
-                .requestMatchers("/api/users/**").permitAll()
+                // ✅ FIX: Added /cards/** to the permitted list
+                // This allows the browser/Swagger to access the cards API
+                .requestMatchers("/api/users/**", "/cards/**").permitAll()
                 
                 .anyRequest().authenticated()
             );
