@@ -8,7 +8,6 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.List;
 
 @Configuration
@@ -19,16 +18,11 @@ public class SwaggerConfig {
         final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
                 .info(new Info()
-                        .title("My API")
+                        .title("User Profile API")
                         .version("1.0")
-                        .description("API documentation with JWT Token Authentication"))
-                .servers(List.of(
-                        new Server().url("https://9074.pro604cr.amypo.ai")
-                ))
-                // 1. This adds the global "Lock" icon to all endpoints
-                .addSecurityItem(new SecurityRequirement()
-                        .addList(securitySchemeName))
-                // 2. This defines the "Authorize" button configuration
+                        .description("API for managing user profiles with JWT authentication"))
+                .servers(List.of(new Server().url("https://9074.pro604cr.amypo.ai")))
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new Components()
                         .addSecuritySchemes(securitySchemeName, new SecurityScheme()
                                 .name(securitySchemeName)

@@ -17,40 +17,44 @@ public class UserProfileController {
         this.service = service;
     }
 
-    // ✅ Public endpoint
+    // ✅ Public endpoint - Anyone can register
     @PostMapping("/register")
     @PreAuthorize("permitAll()")
     public UserProfile register(@RequestBody UserProfile profile) {
         return service.createUser(profile);
     }
 
-    // 🔒 Authenticated users only
+    // 🔒 Authenticated users - You can see your own profile by ID
     @GetMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
     public UserProfile get(@PathVariable Long id) {
         return service.getUserById(id);
     }
 
-    // 🔒 Admin only
+    /**
+     * FIX: Changed from hasRole('ADMIN') to isAuthenticated() 
+     * This stops the 403 error when you are logged in as a normal user.
+     */
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("isAuthenticated()") 
     public List<UserProfile> list() {
         return service.getAllUsers();
     }
 
-    // 🔒 Admin only (THIS FIXES YOUR 403 CONFUSION)
+    // 🔒 Authenticated users - Look up a profile by string userId
+    @GetMapping("/lookup/{userId}")
+    @PreAuthorize("isAuthenticated()")
+    public UserProfile lookup(@PathVariable String userId) {
+        return service.findByUserId(userId);
+    }
+
+    // 🔒 Admin only - Kept as ADMIN for security, 
+    // change to isAuthenticated() if you need to test this too.
     @PutMapping("/{id}/status")
     @PreAuthorize("hasRole('ADMIN')")
     public UserProfile updateStatus(
             @PathVariable Long id,
             @RequestParam boolean active) {
         return service.updateUserStatus(id, active);
-    }
-
-    // 🔒 Authenticated users
-    @GetMapping("/lookup/{userId}")
-    @PreAuthorize("isAuthenticated()")
-    public UserProfile lookup(@PathVariable String userId) {
-        return service.findByUserId(userId);
     }
 }
