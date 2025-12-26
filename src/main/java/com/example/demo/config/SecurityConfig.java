@@ -43,11 +43,12 @@ public class SecurityConfig {
                     "/webjars/**"
                 ).permitAll()
                 
-                // ✅ ADDED: /api/reward-rules/** to the permitted list
+                // ✅ ADDED: /api/intents/** to allow your Purchase Intent endpoints
                 .requestMatchers(
                     "/api/users/**", 
                     "/cards/**", 
-                    "/api/reward-rules/**"
+                    "/api/reward-rules/**",
+                    "/api/intents/**"
                 ).permitAll()
                 
                 .anyRequest().authenticated()
