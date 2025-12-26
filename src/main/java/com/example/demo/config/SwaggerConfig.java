@@ -20,14 +20,18 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("User Profile API")
                         .version("1.0")
-                        .description("API for managing user profiles with JWT authentication"))
-                .servers(List.of(new Server().url("https://9074.pro604cr.amypo.ai")))
+                        .description("API for managing user profiles. Use the /api/auth/login endpoint to get a token."))
+                .servers(List.of(
+                        new Server().url("https://9074.pro604cr.amypo.ai").description("Development Server")
+                ))
+                // This applies security to EVERY endpoint in the UI
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new Components()
                         .addSecuritySchemes(securitySchemeName, new SecurityScheme()
                                 .name(securitySchemeName)
                                 .type(SecurityScheme.Type.HTTP)
                                 .scheme("bearer")
-                                .bearerFormat("JWT")));
+                                .bearerFormat("JWT")
+                                .in(SecurityScheme.In.HEADER))); // Ensures token is sent in Header
     }
 }
