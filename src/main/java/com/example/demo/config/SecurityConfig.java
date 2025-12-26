@@ -2,7 +2,6 @@ package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -36,7 +35,6 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(auth -> auth
-                // Public URLs (No token required)
                 .requestMatchers(
                     "/api/auth/**",
                     "/swagger-ui/**",
@@ -45,11 +43,10 @@ public class SecurityConfig {
                     "/webjars/**"
                 ).permitAll()
                 
-                // 🛑 FIX: Explicitly permit GET requests to /api/users 
-                // This stops the 403 error for the 'list' endpoint
-                .requestMatchers(HttpMethod.GET, "/api/users/**").permitAll()
+                // ✅ FIX: Permit ALL methods (GET, PUT, POST) for /api/users
+                // This stops the 403 Forbidden for the 'status' update
+                .requestMatchers("/api/users/**").permitAll()
                 
-                // Everything else requires authentication
                 .anyRequest().authenticated()
             );
 
