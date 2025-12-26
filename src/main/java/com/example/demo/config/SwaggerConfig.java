@@ -16,21 +16,24 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
+        final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
-                .info(new Info().title("My API").version("1.0"))
+                .info(new Info()
+                        .title("My API")
+                        .version("1.0")
+                        .description("API documentation with JWT Token Authentication"))
                 .servers(List.of(
                         new Server().url("https://9074.pro604cr.amypo.ai")
                 ))
-                // Adds the global security requirement
-                .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
-                // Defines the security scheme
-                .components(new Components().addSecuritySchemes("Bearer Authentication", createAPIKeyScheme()));
-    }
-
-    private SecurityScheme createAPIKeyScheme() {
-        return new SecurityScheme()
-                .type(SecurityScheme.Type.HTTP) // CHANGED THIS LINE
-                .bearerFormat("JWT")
-                .scheme("bearer");
+                // 1. This adds the global "Lock" icon to all endpoints
+                .addSecurityItem(new SecurityRequirement()
+                        .addList(securitySchemeName))
+                // 2. This defines the "Authorize" button configuration
+                .components(new Components()
+                        .addSecuritySchemes(securitySchemeName, new SecurityScheme()
+                                .name(securitySchemeName)
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme("bearer")
+                                .bearerFormat("JWT")));
     }
 }
