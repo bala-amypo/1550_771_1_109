@@ -43,9 +43,12 @@ public class SecurityConfig {
                     "/webjars/**"
                 ).permitAll()
                 
-                // ✅ FIX: Added /cards/** to the permitted list
-                // This allows the browser/Swagger to access the cards API
-                .requestMatchers("/api/users/**", "/cards/**").permitAll()
+                // ✅ ADDED: /api/reward-rules/** to the permitted list
+                .requestMatchers(
+                    "/api/users/**", 
+                    "/cards/**", 
+                    "/api/reward-rules/**"
+                ).permitAll()
                 
                 .anyRequest().authenticated()
             );
