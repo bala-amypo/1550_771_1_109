@@ -1,13 +1,13 @@
 package com.example.demo.config;
 
-import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.security.SecurityRequirement;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import java.util.List;
 
 @Configuration
@@ -15,23 +15,23 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI customOpenAPI() {
-        final String securitySchemeName = "bearerAuth";
         return new OpenAPI()
+                // 1. Project Name and Description
                 .info(new Info()
-                        .title("User Profile API")
+                        .title("Customer Loyalty Tier Upgrader API")
                         .version("1.0")
-                        .description("API for managing user profiles. Use the /api/auth/login endpoint to get a token."))
+                        .description("API documentation for Customer Loyalty project"))
+                // 2. Your Specific Server URL (Preserved)
                 .servers(List.of(
-                        new Server().url("https://9074.pro604cr.amypo.ai").description("Development Server")
+                        new Server().url("https://9202.408procr.amypo.ai/")
                 ))
-                // This applies security to EVERY endpoint in the UI
-                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
-                .components(new Components()
-                        .addSecuritySchemes(securitySchemeName, new SecurityScheme()
-                                .name(securitySchemeName)
+                // 3. Add Authorize Padlock (Security Requirement)
+                .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
+                // 4. Define JWT Configuration
+                .components(new io.swagger.v3.oas.models.Components()
+                        .addSecuritySchemes("Bearer Authentication", new SecurityScheme()
                                 .type(SecurityScheme.Type.HTTP)
                                 .scheme("bearer")
-                                .bearerFormat("JWT")
-                                .in(SecurityScheme.In.HEADER))); // Ensures token is sent in Header
+                                .bearerFormat("JWT")));
     }
 }
