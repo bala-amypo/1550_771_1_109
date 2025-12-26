@@ -27,12 +27,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable) // Fixed warning
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth // Fixed warning
-                .requestMatchers("/api/auth/**", "/simple-status", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/api/users/register",   // ✅ allow register
+                    "/api/users/login",      // ✅ allow login (if exists)
+                    "/api/auth/**",
+                    "/simple-status",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**"
+                ).permitAll()
                 .anyRequest().authenticated()
             );
+
         return http.build();
     }
 }
