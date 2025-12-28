@@ -1,62 +1,27 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(
-    name = "user_profiles",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = "userId"),
-        @UniqueConstraint(columnNames = "email")
-    }
-)
+@Table(name = "users")
 public class UserProfile {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank
-    @Size(min = 3, max = 50)
-    private String userId;   // unique business identifier
-
-    @NotBlank
+    private String userId;
     private String fullName;
-
-    @Email
-    @NotBlank
-    private String email;    // unique
-
-    @NotBlank
+    private String email;
     private String password;
-
     private String role;
-
-    private boolean active = true;
-
+    private Boolean active;
     private LocalDateTime createdAt;
 
-    // Many-to-Many: User ↔ Favourite Cards
-    @ManyToMany
-    @JoinTable(
-        name = "user_favourite_cards",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "card_id")
-    )
-    private Set<CreditCardRecord> favouriteCards = new HashSet<>();
-
     @PrePersist
-    protected void onCreate() {
+    public void prePersist() {
         this.createdAt = LocalDateTime.now();
+        if (this.role == null) this.role = "USER";
     }
-
-    // Getters & Setters …
 
     // Getters and Setters
     public Long getId() { return id; }
